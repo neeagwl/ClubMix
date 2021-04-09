@@ -4,6 +4,7 @@ import HomeScreen from './components/HomeScreen';
 import Login       from  './components/Login';
 import Signup      from './components/Signup';
 import Header from './components/Header';
+import Explore from './components/Explore';
 
 export const UserContext = createContext();
 
@@ -18,6 +19,7 @@ const App=()=> {
           <Route path='/' component={HomeScreen} exact/>
           <Route path='/login' component={Login} exact/>
           <Route path='/signup' component={Signup} exact/>
+          <Route path='/explore' component={Explore} exact />
       </Switch>
       </main>
       {/* <Footer/> */}
