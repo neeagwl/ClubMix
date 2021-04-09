@@ -10,7 +10,6 @@ const App=()=> {
 
   return (
     <Router>
-      <Header/>
       <main>
         <Switch>
           <Route path='/' component={HomeScreen} exact/>
