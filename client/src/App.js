@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Route,Switch} from 'react-router-dom';
 import HomeScreen from './components/HomeScreen';
 import Login       from  './components/Login';
 import Signup      from './components/Signup';
-
+import Header from './components/Header';
 
 export const UserContext = createContext();
 
@@ -12,6 +12,7 @@ const App=()=> {
 
   return (
     <Router>
+        <Header/>
       <main>
         <Switch>
           <Route path='/' component={HomeScreen} exact/>
