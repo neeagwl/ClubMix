@@ -13,6 +13,8 @@ require('./models/Post');
 
 app.use(express.json());
 
+app.use(require('./routes/UserRoutes'));
+
 if( process.env.NODE_ENV ==='development' ){
     app.use(morgan('dev'));
 }
