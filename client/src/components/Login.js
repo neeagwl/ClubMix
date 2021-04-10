@@ -18,7 +18,7 @@ const Login = ({location, history})=>{
   const userLogin = useSelector(state=>state.userLogin);
   const {loading,error,userInfo} = userLogin;
 
-  const redirect = '/index';
+  const redirect = '/';
 
     useEffect(() => {
         if(userInfo){

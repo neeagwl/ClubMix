@@ -37,7 +37,7 @@ router.post('/api/addClub',requireLogin,(req,res)=>{
                 club_email,
                 logo,
             });
-            // console.log(club);
+            console.log(club);
             club.clubAdmin.id = req.user._id;
             // console.log(club);
             club.save().then(club =>{

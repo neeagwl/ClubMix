@@ -22,7 +22,7 @@ const SignUp = ({location,history}) => {
     const userRegister = useSelector(state=>state.userRegister);
     const {error, loading,userInfo} = userRegister;
 
-    const redirect = '/index';
+    const redirect = '/login';
     console.log(userInfo);
 
     useEffect(() => {
