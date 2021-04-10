@@ -17,7 +17,7 @@ app.use(require('./routes/UserRoutes'));
 app.use(require('./routes/ClubRoutes'));
 app.use(require('./routes/PostRoutes'));
 app.use(require('./routes/EventRoutes'));
-app.use(require('./routes/SubscibeRoutes'));
+app.use(require('./routes/SubscribeRoutes'));
 
 if( process.env.NODE_ENV ==='development' ){
     app.use(morgan('dev'));
