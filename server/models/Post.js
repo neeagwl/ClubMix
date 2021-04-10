@@ -20,6 +20,10 @@ const PostSchema = new mongoose.Schema({
             ref: "User"
          }
     ],
+    comments:[{
+        text:String,
+        postedBy:{type:mongoose.Schema.Types.ObjectId, ref:"User"}
+    }],
     photo:String,
     like:Number,
     createdAt:{type:Date , default: Date.now},

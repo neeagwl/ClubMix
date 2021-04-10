@@ -46,7 +46,9 @@ router.get('/api/posts/latest',(req,res)=>{
     let last_date = new Date(current_date.getTime()- (days * 24 * 60 * 60 * 1000))
    // console.log(last_date);
     Post.find({'createdAt':{$gte: last_date}})
-    .sort('-createdAt').populate('postedBy',"_id name").then(posts =>{
+    .sort('-createdAt').populate('postedBy',"_id name")
+    .populate("comments.postedBy","_id name")
+    .then(posts =>{
      //   console.log(posts.length);
        console.log(posts);
         res.json({posts:posts});
@@ -198,5 +200,30 @@ router.put('/api/unlike',requireLogin,(req,res)=>{
 
     })
 })
+
+router.put('/api/comment',requireLogin,(req,res)=>{
+    const comment = {
+        text:req.body.text,
+        postedBy:req.user._id
+    }
+    Post.findByIdAndUpdate(req.body.postId,{
+        $push:{comments:comment}
+    },{
+        new:true
+    }).populate("comments.postedBy","_id name")
+    .populate("postedBy","_id name")
+    .exec((err,result)=>{
+        if(err)
+        {
+            return res.status(422).json({error:err})
+        }
+        else{
+            console.log("result");
+            console.log(result);
+            res.json(result);
+        }
+
+    });
+});
 
 module.exports = router;
