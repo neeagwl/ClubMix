@@ -4,7 +4,12 @@ import { useSelector } from 'react-redux';
 // reactstrap components
 import { Button, Container, Row, Col } from "reactstrap";
 
-
+const url = {
+  Social: 'https://images.squarespace-cdn.com/content/v1/51fffd7de4b00bacedcfb167/1390850171331-3JG5JOFWXSDL4D1ZKIO7/ke17ZwdGBToddI8pDm48kDrPwNVXYEunyd5GI-T5dTMUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcjnGyVxz4_7fGUBBocNlg5GFIaMd2sRlNBQxXhqLPHNahoHUF39SckYf9CqjRTAfQ/Secret-Society-Wallpaper-I--b%26w-%281000px%29.jpg',
+  Cultural: 'https://wallpaperaccess.com/full/561795.png',
+  Technical: 'https://wallpaperaccess.com/full/2454628.png',
+  Sports: 'https://wallpaperaccess.com/full/191736.jpg'
+}
 function ClubHeader({ClubProfile}) {
   // console.log(ClubProfile);
   const userLogin = useSelector(state=>state.userLogin);
@@ -16,7 +21,7 @@ function ClubHeader({ClubProfile}) {
         style={{
           minHeight: "600px",
           backgroundImage:
-            "url(https://images.unsplash.com/photo-1532074205216-d0e1f4b87368?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjJ8fHByb2ZpbGV8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&w=1000&q=80)",
+            "url("+url[ClubProfile.clubType]+")",
           backgroundSize: "cover",
           backgroundPosition: "center top",
         }}

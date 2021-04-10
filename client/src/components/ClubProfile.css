@@ -191,7 +191,18 @@ pl-lg-4
 .my-4
 form-control-label
 form-control-alternative */
-
+.alert{
+  position: fixed;
+  margin-right: 20px;
+  right: 0;
+  z-index: 1002;
+  width: 400px;
+  height: auto;
+  background-color: rgb(211, 239, 243);
+  color: #000;
+  font-size: 20px;
+  border:none;
+}
 .order-xl-1 {
   margin-bottom: 100px;
   order: 1; }

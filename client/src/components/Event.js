@@ -1,6 +1,7 @@
 import React from 'react';
 import Moment from 'react-moment';
 import 'moment-timezone';
+import './Post.css';
 
 const Event = ({event}) => {
    return (
@@ -9,7 +10,7 @@ const Event = ({event}) => {
     <img className="ui avatar image" src="https://ict4kids.files.wordpress.com/2013/05/mrc-2.png" />
       <div className="header" style={{marginLeft:'5px',marginTop:'4px'}}>Admin added an event</div>
     </div>
-    <div className="content">
+    <div className="content card-cont">
       <h4 className="ui sub header">{event.Title}</h4>
       
       <div className="ui small feed">

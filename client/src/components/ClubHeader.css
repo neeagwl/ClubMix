@@ -41,7 +41,7 @@
                 transition: none; } }
 
   .bg-gradient-default {
-
+     
   }
 .opacity-8 {
     opacity: 0.3 !important; }
@@ -55,13 +55,19 @@
     line-height: 1.5; 
     display: block;
     font-weight: 900;
+
 }
 
 .text-white {
     color: #fff !important; 
     line-height: 1.5;
-font-style: normal;}
+font-style: normal;
 
+}
+p.text-white{
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0, 0.4);
+}
 
 .mt-0,
 .my-0 {
@@ -80,4 +86,5 @@ font-style: normal;}
     font-size: 15px;
     font-weight: 700;
     letter-spacing: 2px;
+
 }

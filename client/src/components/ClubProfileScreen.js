@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
+import {Alert} from 'react-bootstrap';
 import './ClubProfile.css'
 // reactstrap components
 import {
@@ -32,6 +32,7 @@ function ClubProfile() {
          const {clubId} = useParams ()
          const [open, setOpen] = useState(false);
          const [open2, setOpen2] = useState(false);
+         const [show, setShow] = useState(false);
 
          const userLogin = useSelector(state=>state.userLogin);
          const {loading, error,userInfo} = userLogin;
@@ -92,6 +93,7 @@ function ClubProfile() {
           .then(UserSubscribe => {
             console.log(UserSubscribe)
             setUserSubscribe(true);
+            setShow(true);
           })
           .catch(err=> {
             console.log(err)
@@ -107,6 +109,7 @@ function ClubProfile() {
     .then(res=>res.json())
     .then(UserSubscribe => {
       setUserSubscribe(false);
+      setShow(false);
     })
     .catch(err=> {
         console.log(err)
@@ -119,6 +122,18 @@ function ClubProfile() {
 
   return (
     <>
+ 
+
+  { show && <Alert className="alert" variant="danger" onClose={() => setShow(false)} dismissible>
+        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+        <p>
+          Change this and that and try again. Duis mollis, est non commodo
+          luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
+          Cras mattis consectetur purus sit amet fermentum.
+        </p>
+      </Alert>
+  }
+ 
     {error && <Message variant='danger'>{error}</Message>}
     {loading && <Loader/>}
       { ClubProfile && <ClubHeader ClubProfile={ClubProfile} /> }

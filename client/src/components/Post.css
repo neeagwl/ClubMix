@@ -12,4 +12,14 @@ time{
 
 .card-cont{
     padding:50px 30px;
+    font-family: "Lato", sans-serif;
+
+}
+
+.card-cont .header{
+    font-size: 20px;
+}
+
+.card-cont .description{
+    font-size: 15px
 }
