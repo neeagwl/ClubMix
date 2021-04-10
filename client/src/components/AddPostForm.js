@@ -29,9 +29,9 @@ const AddPostForm = ({location,clubId}) => {
     const redirect = '/';
 
     useEffect(()=>{
-        if(!userInfo){
-            history.push(redirect)
-        }
+        // if(!userInfo){
+        //     history.push(redirect)
+        // }
         if(url)
         {
             submitHandler();
@@ -40,7 +40,7 @@ const AddPostForm = ({location,clubId}) => {
         // {
         //     history.push('/');
         // }
-    },[url,userInfo, history]);
+    },[url]);
 
     const submitHandler =()=>{
         console.log(title,description,photo);

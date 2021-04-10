@@ -185,21 +185,21 @@ function ClubProfile() {
                     {
                       ClubProfile.facebook_link && (
                         <div>
-                          <a href="#" ><i class="fa fa-facebook"></i>{ClubProfile.facebook_link}</a>
+                          <a href={ClubProfile.facebook_link} ><i class="fa fa-facebook"></i>{ClubProfile.facebook_link}</a>
                         </div>
                       )
                     }
                     {
                       ClubProfile.twitter_link && (
                         <div>
-                        <a href="#" ><i class="fa fa-twitter"></i>{ClubProfile.twitter_link}</a>
+                        <a href={ClubProfile.twitter_link} ><i class="fa fa-twitter"></i>{ClubProfile.twitter_link}</a>
                         </div>
                       )
                     }
                     {
                       ClubProfile.insta_link && (
                         <div>
-                        <a href="#" ><i class="fa fa-instagram"></i>{ClubProfile.insta_link}</a>
+                        <a href={ClubProfile.insta_link} ><i class="fa fa-instagram"></i>{ClubProfile.insta_link}</a>
                         </div>
                       )
                     }

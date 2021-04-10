@@ -1,15 +1,16 @@
 import React, { useState,useEffect } from 'react'
 import FormContainer from '../components/FormContainer';
 import {Form, Button, Row, Col} from 'react-bootstrap';
-import {Link} from 'react-router-dom';
+import {Link,useHistory} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import Message from './Message';
 import Loader from './Loader';
 import {registerEvent} from '../actions/EventAction';
 
 
-const AddEventForm = ({history,clubId}) => {
+const AddEventForm = ({clubId}) => {
     // console.log(clubId);
+    const history = useHistory();
     const [heading,setHeading]= useState("");
     const[description,setDescription] = useState("");
     const[website,setWebsite]=useState("");
@@ -25,11 +26,11 @@ const AddEventForm = ({history,clubId}) => {
     const eventRegister = useSelector(state=>state.eventRegister);
     const {error:errorEvent,eventInfo} = eventRegister;
 
-    useEffect(()=>{
-        if(!userInfo){
-            history.push('/')
-        }
-    },[history]);
+    // useEffect(()=>{
+    //     if(!userInfo){
+    //         history.push('/')
+    //     }
+    // },[history]);
 
     const submitHandler=()=>{
         console.log(heading);
