@@ -1,8 +1,8 @@
-<h1 align="center">Hack36 Template Readme</h1>
+<!-- <h1 align="center">Hack36 Template Readme</h1>
 <p align="center">
 </p>
 
-<a href="https://hack36.com"> <img src="http://bit.ly/BuiltAtHack36" height=20px> </a>
+<a href="https://hack36.com"> <img src="http://bit.ly/BuiltAtHack36" height=20px> </a> -->
 
 
 ## Introduction:
@@ -26,12 +26,12 @@
 
 ## Contributors:
 
-Team Name: OP Squad
+Team Name: Callback_Chasers
 
-* [Anuj Modi](https://github.com/descifrado)
-* [Arsh Singh](https://github.com/iosdev474)
-* [Shashwat Pandey](https://github.com/shashwat1998)
-* [Manas Uniyal](https://github.com/ManasUniyal)
+* [Neetu Agrawal](https://github.com/neeagwl)
+* [Shaifali Singh](https://github.com/shaifali-singh)
+* [Ambica Bhatia](https://github.com/Ambica06)
+* [Prerna Agrawal](https://github.com/Prerna27agrawal)
 
 
 ### Made at:
