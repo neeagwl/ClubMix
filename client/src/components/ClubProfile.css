@@ -21,6 +21,9 @@ h5 mt-4
 ni business_briefcase-24 mr-2
 ni education_hat mr-2
 my-4 */
+*{
+  font-family: "Lato", sans-serif;
+}
 .my-3{
   margin-top: 5px;
   margin-bottom: 5px;
@@ -63,6 +66,7 @@ color: white;
 }
 .mt--7,
 .my--7 {
+  font-family: "Lato", sans-serif;
 margin-top: -6rem !important; }
 .order-xl-2 {
   order: 2; }
