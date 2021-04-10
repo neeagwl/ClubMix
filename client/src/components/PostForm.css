@@ -1,0 +1,35 @@
+/* .dimmed.dimmable>.ui.animating.dimmer, .dimmed.dimmable>.ui.visible.dimmer, .ui.active.dimmer {
+
+}
+.modals.dimmer .ui.scrolling.modal {
+  
+ 
+} */
+.ui .scrolling .modal .transition .visible{
+  height: auto;
+  opacity: 1;
+  z-index: 100;
+  background-color: black;
+}
+
+.ui .scrolling .modal .transition .visible :active{
+  height: auto;
+  opacity: 1;
+  z-index: 2000;
+}
+
+.ui .modal{
+    align-items: center;
+    background:  rgba(0,0,0,.9);
+    padding-left: 30%;
+    padding-top: 5%;
+}
+
+.ui .dimmer{
+    filter: blur(8px);
+}
+
+.content{
+    max-height: 350px;
+    overflow: auto;
+}

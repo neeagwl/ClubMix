@@ -3,6 +3,9 @@
   margin: 30px;
 } 
 
+body{
+  font-family: "Lato", sans-serif;
+}
 .auth-card{
   padding: 20px;
   text-align: center;
@@ -44,3 +47,13 @@ transform: scale(1.05,1.05);
 max-height:400px;
 overflow: auto;
 }
+/* 
+.feed-date{
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.feed-img img{
+  height: auto;
+  width: 50px;
+} */

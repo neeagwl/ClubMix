@@ -230,7 +230,7 @@ const IndexPost = () => {
                                             <h6 style={{color:"black"}}>{post.heading}</h6>
                                             {/* <h4>{post.postedBy._id}</h4> */}
                                              {/* //Also Show club name */}
-                                             <a href={`/clubInfo/${post.postedBy._id}` } >{post.postedBy.name}</a>
+                                             <a href={`/clubInfo/${post.postedBy._id}` } ><b>{post.postedBy.name}</b> Club</a>
                                         </Col>
                                         <Col style={{textAlign:"right", }}>
                                            <p><Moment fromNow>{post.createdAt}</Moment></p>
@@ -277,7 +277,7 @@ const IndexPost = () => {
                                             </Col>
                                             <Col style={{textAlign:"right", }}>
                                              {/* <a href={`/clubInfo/${event.postedBy._id}` } >{event.postedBy.name}</a> */}
-                                            <p><a href={`/clubInfo/${event.postedBy._id}`} >{event.postedBy.name}</a></p>
+                                            <p><a href={`/clubInfo/${event.postedBy._id}`} ><b>{event.postedBy.name}</b> Club</a></p>
                                                 {/* <p>CLUB NAME</p> */}
                                             </Col>
                                         </Row>

@@ -1,0 +1,15 @@
+img.ui.avatar.image{
+    width: 45px;
+    height: 45px;
+}
+
+.header.post-header{
+    font-size: medium;
+}
+time{
+    font-size: medium;
+}
+
+.card-cont{
+    padding:50px 30px;
+}

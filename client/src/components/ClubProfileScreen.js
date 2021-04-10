@@ -16,6 +16,7 @@ import {
   CardHeader,
   CardBody,
 } from "reactstrap";
+import { Header, Icon, Modal } from 'semantic-ui-react';
 import ClubHeader   from "./ClubHeader";
 import AddEventForm from './AddEventForm';
 import AddPostForm  from './AddPostForm';
@@ -30,11 +31,16 @@ function ClubProfile() {
          const [UserSubscribe, setUserSubscribe] = useState(false);
          const [flag, setFlag] = useState(false);
          const {clubId} = useParams ()
-         
+         const [open, setOpen] = useState(false);
+         const [open2, setOpen2] = useState(false);
+
          const userLogin = useSelector(state=>state.userLogin);
          const {loading, error,userInfo} = userLogin;
         
-
+         const ModalHandler = () => {
+           setOpen(false);
+           setOpen2(false);
+         }
          useEffect(()=>{
               fetch(`/api/clubInfo/${clubId}`)
               .then(res => res.json())
@@ -42,12 +48,27 @@ function ClubProfile() {
                 console.log(club);
                 setClubProfile(club.club);
               })
+              .catch(err=> {
+                console.log(err)
+              })
+            .catch(err =>{
+              console.log(err)
+              })
+
               console.log(userInfo);
               fetch(`/api/allClubPostandEvent/${clubId}`)
               .then(res=>res.json())
               .then(PostsandEvents=>{
                 setPostandEvent(PostsandEvents.PostsandEvents);
+                
               })
+              .catch(err=> {
+                console.log(err)
+              })
+            .catch(err =>{
+              console.log(err)
+              })
+            
 
               if(userInfo){
                 fetch(`/api/isUserSubscribe/${clubId}/${userInfo.user._id}`)
@@ -55,6 +76,12 @@ function ClubProfile() {
                 .then(UserSubscribe => {
                   console.log(UserSubscribe);
                   setUserSubscribe(UserSubscribe.UserSubscribe);
+                })
+                .catch(err=> {
+                  console.log(err)
+                })
+              .catch(err =>{
+                console.log(err)
                 })
               }
             },[])
@@ -80,6 +107,18 @@ function ClubProfile() {
           //   console.log(UserSubscribe)
           //   setUserSubscribe(true);
           // })
+          // fetch(`/api/UserSubscribe/${clubId}/${userInfo.user._id}`)
+          // .then(res=>res.json())
+          // .then(UserSubscribe => {
+          //   console.log(UserSubscribe)
+          //   setUserSubscribe(true);
+          // })
+          // .catch(err=> {
+          //   console.log(err)
+          // })
+          // .catch(err =>{
+          // console.log(err)
+          // })
   } 
   
    const unsubscribeHandler = (e)=>{
@@ -89,6 +128,13 @@ function ClubProfile() {
     .then(UserSubscribe => {
       setUserSubscribe(false);
     })
+    .catch(err=> {
+        console.log(err)
+      })
+    .catch(err =>{
+      console.log(err)
+      })
+  
  }
 
   return (
@@ -99,7 +145,7 @@ function ClubProfile() {
     { ClubProfile ?
       <Container className="mt--7" fluid>
         <Row>
-          <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
+          <Col className="order-xl-2 mb-5 mb-xl-0" xl="5">
             <Card className="card-profile shadow">
               <Row className="justify-content-center">
                 <Col className="order-lg-2" lg="3">
@@ -124,7 +170,7 @@ function ClubProfile() {
                       color="primary"
                       href="#pablo"
                       onClick={unsubscribeHandler}
-                      size="sm"
+                      size="lg"
                       style={{opacity:"0.7"}}
                     >
                     UnSubscribe
@@ -134,7 +180,7 @@ function ClubProfile() {
                             color="danger"
                             href="#pablo"
                             onClick={subscribeHandler}
-                            size="sm"
+                            size="lg"
                           >
                           Subscribe
                           </Button>
@@ -177,43 +223,38 @@ function ClubProfile() {
                   </div>
                 </Row>
                 <div className="text-center">
-                  <h3>
-                    Club Name
-                    <span className="font-weight-light"> {ClubProfile.name}</span>
-                  </h3>
-                  <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2" />
-                    ALLAHABAD
-                  </div>
+                    <span className="club-name"> {ClubProfile.name} Club</span>
+                   
                     {ClubProfile.date_of_establishment && (
-                      <div className="h5 mt-4">
-                      <i className="ni business_briefcase-24 mr-2" />
+                      <div className="head">
+                      <i class="fas fa-calendar-day fa-sm"></i>
                       {ClubProfile.date_of_establishment.substring(0,10)}
                       </div>)
                     }
-                  <div>
-                    <i className="ni education_hat mr-2" />
+                    <i class="fas fa-map-marked-alt fa-2x"></i>
+                  <span className="location">
+                  
                     MNNIT ALLAHABAD
-                  </div>
+                  </span>
                   <div className="text-left">
                     {
                       ClubProfile.facebook_link && (
                         <div>
-                          <a href="#" ><i class="fa fa-facebook"></i>{ClubProfile.facebook_link}</a>
+                          <a href={ClubProfile.facebook_link} ><i class="fa fa-facebook"></i>{ClubProfile.facebook_link}</a>
                         </div>
                       )
                     }
                     {
                       ClubProfile.twitter_link && (
                         <div>
-                        <a href="#" ><i class="fa fa-twitter"></i>{ClubProfile.twitter_link}</a>
+                        <a href={ClubProfile.twitter_link} ><i class="fa fa-twitter"></i>{ClubProfile.twitter_link}</a>
                         </div>
                       )
                     }
                     {
                       ClubProfile.insta_link && (
                         <div>
-                        <a href="#" ><i class="fa fa-instagram"></i>{ClubProfile.insta_link}</a>
+                        <a href={ClubProfile.insta_link} ><i class="fa fa-instagram"></i>{ClubProfile.insta_link}</a>
                         </div>
                       )
                     }
@@ -223,8 +264,8 @@ function ClubProfile() {
                   </div> */}
                   </div>
                   <hr className="my-4" />
-                  <p>
-                   {ClubProfile.description.substring}
+                  <p style={{fontSize:'15px'}}>
+                   {ClubProfile.description.substring(0,20)}
                   </p>
                   {/* iska hisab samjh ni aaya */}
                   <a href="#pablo" onClick={(e) => e.preventDefault()}>
@@ -234,14 +275,52 @@ function ClubProfile() {
               </CardBody>
             </Card>
           </Col>
-          <Col className="order-xl-1" xl="8">
+          <Col className="order-xl-1" xl="7">
             <Card className="bg-secondary shadow">
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
                   <Col xs="8">
                     <h3 className="mb-0">View Posts and Events</h3>
                   </Col>
-                  {ClubProfile && userInfo && ClubProfile.clubAdmin.id === userInfo._id &&
+                  { ClubProfile && userInfo && ClubProfile.clubAdmin.id === userInfo.user._id && 
+                   <Col className="text-right" xs="4">
+                  <Modal
+                      closeIcon
+                      open={open}
+                      trigger={<Button className="margin-right"
+                      color="primary"
+                      href="#pablo"
+                      onClick={(e) => e.preventDefault()}
+                      size="lg"
+                    >
+                    ADD EVENT
+                  </Button>}                     
+                     onClose={() => setOpen(false)}
+                     onOpen={() => setOpen(true)}
+                    >
+                    <AddEventForm clubId={ClubProfile._id} ModalHandler={ModalHandler}/>
+                    </Modal>
+                                  
+                    <Modal
+                      closeIcon
+                      open={open2}
+                      trigger={<Button
+                        color="primary"
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                        size="lg"
+                      >ADD POST
+                      </Button>}                     
+                     onClose={() => setOpen2(false)}
+                     onOpen={() => setOpen2(true)}
+                    >
+                     <AddPostForm clubId={ClubProfile._id}  ModalHandler={ModalHandler}/>
+                    </Modal>
+                  </Col> 
+                  }
+                  
+
+                 {/* {ClubProfile && userInfo && ClubProfile.clubAdmin.id == userInfo._id &&
                       <Col className="text-right" xs="4">
                       <Button className="margin-right"
                           color="primary"
@@ -260,15 +339,13 @@ function ClubProfile() {
                           ADD POST
                         </Button>
                       </Col>
-                  }
+                  }  */}
                  
                 </Row>
               </CardHeader>
-              <CardBody>
-                  <AddEventForm clubId={ClubProfile._id}/>
-                  <AddPostForm clubId={ClubProfile._id}/>
- 
-              </CardBody>
+                  
+                
+            <CardBody className="post-card">
               { PostandEvent.map(PostandEvent=>{
         
         if(PostandEvent.data_type == "Event")
@@ -277,6 +354,7 @@ function ClubProfile() {
         return <Post  post={PostandEvent} />
  })
 }
+</CardBody>
             </Card>
             
           </Col>

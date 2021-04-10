@@ -21,6 +21,13 @@ h5 mt-4
 ni business_briefcase-24 mr-2
 ni education_hat mr-2
 my-4 */
+*{
+  font-family: "Lato", sans-serif;
+}
+.my-3{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 .fa {
   padding: 10px;
   text-align: center;
@@ -59,6 +66,7 @@ color: white;
 }
 .mt--7,
 .my--7 {
+  font-family: "Lato", sans-serif;
 margin-top: -6rem !important; }
 .order-xl-2 {
   order: 2; }
@@ -89,6 +97,8 @@ margin-bottom: 3rem !important; }
 .card-profile-image img:hover {
   transform: translate(-50%, -33%); }
 .rounded-circle {
+  width: 200px;
+  height: 200px;
   border-radius: 50% !important; }
 .text-center {
   text-align: center !important; }
@@ -116,11 +126,12 @@ margin-bottom: 3rem !important; }
                                                 .card-profile-stats > div:last-child {
                                                   margin-right: 0; }
                                                 .card-profile-stats > div .heading {
-                                                  font-size: 1.1rem;
-                                                  font-weight: bold;
+                                                  font-size: 20px;
+                                                  font-weight: 700;
                                                   display: block; }
                                                 .card-profile-stats > div .description {
-                                                  font-size: .875rem;
+                                                  font-size: 20px;
+                                    
                                                   color: #adb5bd; }  
                                                   .mt-md-5,
                                                   .my-md-5 {
@@ -182,6 +193,7 @@ form-control-label
 form-control-alternative */
 
 .order-xl-1 {
+  margin-bottom: 100px;
   order: 1; }
   
 .bg-secondary {
@@ -223,3 +235,66 @@ button.bg-secondary:focus {
                                       .form-control-alternative:focus {
                                         box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08); }
                              
+.card-profile{
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 20px;
+}
+.btn-lg{
+  padding: 15px;
+}
+.post-card{
+  margin-bottom: 100px;
+}
+.ui.card{
+  width: auto;
+  margin: 70px;
+  transition: 0.3;
+}
+
+.ui.card:hover{
+  box-shadow: 0px 20px 40px rgba(0,0,0,0.4);
+  transform: scale(1.05,1.05);
+}
+
+.card-profile-stats{
+  font-size: 20px;
+}
+
+.card-profile-stats.heading{
+  font-size: 35px;
+  font-weight: bold;
+}
+
+span.headin{
+  font-size: 35px;
+  font-weight: bold;
+}
+
+.club-name{
+  font-size: 30px;
+  color: #adb5bd;
+  font-weight: 900 ;
+}
+
+.head{
+  font-size: medium;
+  font-weight: 500;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.location{
+  font-size: 15px;
+  margin-left: 10px;
+  font-weight: 500;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.text-left a:hover{
+  color: #3B5998;
+  font-size: medium;
+  font-weight: 700;
+}
+

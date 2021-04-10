@@ -30,7 +30,7 @@ const EventCarousel = () => {
                   <h2 style={{color:"white",fontSize:"35px"}} >
                     {event.Title}
                   </h2>
-                  <p  class="carousel-caption" style={{fontSize:"25px",position:"static",color:"whitesmoke", opacity:"1",marginBottom:"0px"}}>
+                  <p  class="carousel-caption" style={{fontSize:"18px",position:"static",color:"whitesmoke", opacity:"1",marginBottom:"0px"}}>
                   {event.description}
                 </p>
                 <p class="carousel-caption" style={{position:"static",color:"whitesmoke", opacity:"1",marginBottom:"0px",paddingBottom:"0px"}}><b>START DATE :</b> <Moment format="DD/MM/YYYY">{event.Start_date}</Moment></p>
