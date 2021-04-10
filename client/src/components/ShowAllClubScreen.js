@@ -21,13 +21,19 @@ const ShowAllClubScreen =()=>{
 
 useEffect(()=>{
     console.log(`/api/allClubs/${clubType}`);
-   fetch(`/api/allClubs/${clubType}`
-   ).then(res=>res.json()
+   fetch(`/api/allClubs/${clubType}`)
+   .then(res=>res.json())
    .then(result =>{
        console.log(result.clubs.length);
         console.log(result);
        setClubs(result.clubs);
-   }))
+   }).catch(err=>{
+       console.log(err);
+   })
+   .catch(err=>{
+       console.log(err);
+   })
+
 },[]);
 
 return (

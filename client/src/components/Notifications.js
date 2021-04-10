@@ -20,6 +20,12 @@ const Notifications = () => {
           console.log(notifs.notifs);
           setNotifs(notifs.notifs);
         })
+        .catch(err => {
+          console.log(err)
+        })
+        .catch(err=>{
+          console.log(err)
+        })
 
     },[])
 
@@ -51,7 +57,9 @@ return (
               </Feed>
               </Nav.Link>
                         </LinkContainer>
+                        <hr className="my-4" />
               </div>
+           
                 )
             })
             }

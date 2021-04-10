@@ -15,6 +15,7 @@ import {
   CardHeader,
   CardBody,
 } from "reactstrap";
+import { Header, Icon, Modal } from 'semantic-ui-react';
 import ClubHeader   from "./ClubHeader";
 import AddEventForm from './AddEventForm';
 import AddPostForm  from './AddPostForm';
@@ -28,11 +29,16 @@ function ClubProfile() {
          const [PostandEvent,setPostandEvent] = useState([]);
          const [UserSubscribe, setUserSubscribe] = useState(false);
          const {clubId} = useParams ()
-         
+         const [open, setOpen] = useState(false);
+         const [open2, setOpen2] = useState(false);
+
          const userLogin = useSelector(state=>state.userLogin);
          const {loading, error,userInfo} = userLogin;
         
-
+         const ModalHandler = () => {
+           setOpen(false);
+           setOpen2(false);
+         }
          useEffect(()=>{
               fetch(`/api/clubInfo/${clubId}`)
               .then(res => res.json())
@@ -40,12 +46,27 @@ function ClubProfile() {
                 console.log(club);
                 setClubProfile(club.club);
               })
+              .catch(err=> {
+                console.log(err)
+              })
+            .catch(err =>{
+              console.log(err)
+              })
+
               console.log(userInfo);
               fetch(`/api/allClubPostandEvent/${clubId}`)
               .then(res=>res.json())
               .then(PostsandEvents=>{
                 setPostandEvent(PostsandEvents.PostsandEvents);
+                
               })
+              .catch(err=> {
+                console.log(err)
+              })
+            .catch(err =>{
+              console.log(err)
+              })
+            
 
               if(userInfo){
                 fetch(`/api/isUserSubscribe/${clubId}/${userInfo.user._id}`)
@@ -53,6 +74,12 @@ function ClubProfile() {
                 .then(UserSubscribe => {
                   console.log(UserSubscribe);
                   setUserSubscribe(UserSubscribe.UserSubscribe);
+                })
+                .catch(err=> {
+                  console.log(err)
+                })
+              .catch(err =>{
+                console.log(err)
                 })
               }
             },[])
@@ -65,6 +92,12 @@ function ClubProfile() {
             console.log(UserSubscribe)
             setUserSubscribe(true);
           })
+          .catch(err=> {
+            console.log(err)
+          })
+          .catch(err =>{
+          console.log(err)
+          })
   } 
   
    const unsubscribeHandler = (e)=>{
@@ -74,6 +107,13 @@ function ClubProfile() {
     .then(UserSubscribe => {
       setUserSubscribe(false);
     })
+    .catch(err=> {
+        console.log(err)
+      })
+    .catch(err =>{
+      console.log(err)
+      })
+  
  }
 
   return (
@@ -222,30 +262,44 @@ function ClubProfile() {
                     <h3 className="mb-0">View Posts and Events</h3>
                   </Col>
                   <Col className="text-right" xs="4">
-                  <Button className="margin-right"
+                  <Modal
+                      closeIcon
+                      open={open}
+                      trigger={<Button className="margin-right"
                       color="primary"
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
                       size="sm"
                     >
-                      ADD EVENT
-                    </Button>
-                    <Button
-                      color="primary"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="sm"
+                    ADD EVENT
+                  </Button>}                     
+                     onClose={() => setOpen(false)}
+                     onOpen={() => setOpen(true)}
                     >
-                      ADD POST
-                    </Button>
+                    <AddEventForm clubId={ClubProfile._id} ModalHandler={ModalHandler}/>
+                    </Modal>
+
+                    <Modal
+                      closeIcon
+                      open={open2}
+                      trigger={<Button
+                        color="primary"
+                        href="#pablo"
+                        onClick={(e) => e.preventDefault()}
+                        size="sm"
+                      >ADD POST
+                      </Button>}                     
+                     onClose={() => setOpen2(false)}
+                     onOpen={() => setOpen2(true)}
+                    >
+                     <AddPostForm clubId={ClubProfile._id}  ModalHandler={ModalHandler}/>
+                    </Modal>
                   </Col>
                 </Row>
               </CardHeader>
-              <CardBody>
-                  <AddEventForm clubId={ClubProfile._id}/>
-                  <AddPostForm clubId={ClubProfile._id}/>
- 
-              </CardBody>
+                  
+                
+            <CardBody>
               { PostandEvent.map(PostandEvent=>{
         
         if(PostandEvent.data_type == "Event")
@@ -254,6 +308,7 @@ function ClubProfile() {
         return <Post  post={PostandEvent} />
  })
 }
+</CardBody>
             </Card>
             
           </Col>
