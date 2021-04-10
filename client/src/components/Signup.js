@@ -16,8 +16,8 @@ const SignUp = ({location,history}) => {
     const [ registration_no,setRegistration_no] = useState("");
 
     const dispatch = useDispatch ();
-    const userRegister = useSelector(state=>state.userRegister);
-    const {loading,error,userInfo} = userRegister;
+    const userLogin = useSelector(state=>state.userLogin);
+    const {loading,error,userInfo} = userLogin;
 
     const redirect = location.search? location.search.split('=')[1]:'/';
 
@@ -103,7 +103,7 @@ const SignUp = ({location,history}) => {
             <Row className="py-3">
                 <Col>
                     Already have an account?{' '}
-                    <Link to={redirect?`/login/${redirect}`:'/login'}>
+                    <Link to="/login">
                         Login
                     </Link>
                 </Col>

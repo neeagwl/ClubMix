@@ -46,9 +46,9 @@ router.get('/api/posts/latest',(req,res)=>{
     let last_date = new Date(current_date.getTime()- (days * 24 * 60 * 60 * 1000))
    // console.log(last_date);
     Post.find({'createdAt':{$gte: last_date}})
-    .sort('-createdAt').then(posts =>{
+    .sort('-createdAt').populate('postedBy',"_id name").then(posts =>{
      //   console.log(posts.length);
-    //    console.log(posts);
+       console.log(posts);
         res.json({posts:posts});
     }).catch(err =>{
         console.log(err);
@@ -75,11 +75,127 @@ router.post('/api/addPost',(req,res)=>{
         description:description,
         photo:photo
     });
+    Club.findOne({_id:clubId}).populate('subscribedBy')
+    .then( club =>{
+    
+  const message = `${club.name} created a new post ${title}.` 
+  const notif = {
+       text: message,
+       createdAt: Date.now(),
+       Club_id: club.id,
+       img: club.logo
+  }
+   club.subscribedBy.forEach(function (eachuser) {
+       eachuser.notifications.push(notif);
+       eachuser.save();
+    });
+
+
+  //   //email for notification of new job
+  //   if (users.length > 0) {
+  //     const output = `
+  // <p>Greetings from ClubMix,</p>
+  // <p> An event is soon going to be held organized by ${club.name} Club</p>
+  // <h3>Event details</h3>
+  // <h2>${Title}</h2>
+  // <ul>
+  // <li><b>Description</b>: ${description} </li>
+  // <li><b>Start Date</b>: ${Start_Date} </li>
+  // <li><b>End Date</b>: ${End_Date} </li>
+  // </ul>
+  // <p>
+  // We are looking forward for your particiaption
+  // </p>
+  // <p>NOTE: You are receiving this mail because you are subscribed to this page </p>
+  // `;
+  //     let transporter = nodemailer.createTransport({
+  //       // host: 'mail.google.com',
+  //       host: 'smtp.gmail.com',
+  //       port: 587,
+  //       secure: false,
+  //       //service: 'Gmail',
+  //       auth: {
+  //         user :process.env.PORTAL_MAIL_ID,
+  //         pass :process.env.PORTAL_MAIL_PASSWORD
+  //       },
+  //       tls: {
+  //         rejectUnauthorized: false
+  //       }
+  //     });
+
+  //     let mailOptions = {
+  //       from: '"ClubMix"',
+  //       to: users,
+  //       subject: 'Upcoming Event !!',
+  //       text: '',
+  //       html: output
+  //     };
+  //     transporter.sendMail(mailOptions, (error, info) => {
+  //       if (err) {
+  //         console.log(err);
+  //       }
+  //       console.log('Message sent: %s', info.messageId);
+        //console.log('Preview Url : %s', nodemailer.getTestMessageUrl(info));
+        //res.redirect('/company/' + job.postedBy.id + '/viewjob')
+    // console.log(event);
+      // })
+    // }
+
+    }).catch ( err => {
+        console.log(err);
+    })
     post.postedBy.id = clubId;
+    post.postedBy= clubId;
+    Club.findOne({_id:clubId}).then(club =>{
+        // console.log(typeof(post_count));
+        club.post_count++;
+        // console.log("checking posts count");
+        // console.log(club);
+        // console.log(club.post_count);
+        club.save();
+        console.log(club);
+
+    })
     post.save().then(post =>{
         res.json({message:"saved post successfully",post:post});
     }).catch(err=>{
         console.log(err);
+    })
+})
+
+
+
+router.put('/api/like',requireLogin,(req,res)=>{
+    Post.findByIdAndUpdate(req.body.postId,{
+        $push:{likes:req.user._id}
+    },{
+        new:true
+    }).exec((err,result)=>{
+        if(err)
+        {
+            return res.status(422).json({error:err})
+        }
+        else{
+            res.json(result);
+        }
+
+    });
+});
+
+router.put('/api/unlike',requireLogin,(req,res)=>{
+    Post.findByIdAndUpdate(req.body.postId,{
+        $pull:{likes:req.user._id}
+    },{
+        new:true
+    }).exec((err,result)=>{
+        if(err)
+        {
+            return res.status(422).json({error:err})
+        }
+        else{
+            res.json(result);
+        }
+
     })
 })
 

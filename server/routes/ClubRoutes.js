@@ -78,8 +78,8 @@ router.get('/api/allClubPostandEvent/:id',(req,res)=>{
 //     console.log(postsandevents);
 //     res.json({postsandevents:postsandevents});
 // })
-    Post.find({'postedBy.id':req.params.id}).then(posts=>{
-              Event.find({'postedBy.id':req.params.id}).then(events=>{
+    Post.find({'postedBy':req.params.id}).then(posts=>{
+              Event.find({'postedBy':req.params.id}).then(events=>{
                     // console.log(typeof(posts));
                     // console.log(events);
                     

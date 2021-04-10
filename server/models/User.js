@@ -18,7 +18,13 @@ const UserSchema = new mongoose.Schema({
     registration_no :{
         type:String,
         required:true
-    }
+    },
+    notifications : [{
+        text:String,
+        createdAt:{type:Date , default: Date.now},
+        Club_id:String,
+        img:String
+    }]
 },{
     timestamps:true,
 });

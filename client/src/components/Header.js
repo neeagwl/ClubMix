@@ -4,14 +4,14 @@ import { withRouter,Link } from "react-router-dom";
 import {LinkContainer} from 'react-router-bootstrap';
 import {Navbar, Nav, Container, NavDropdown} from 'react-bootstrap';
 import {logout} from '../actions/UserAction';
+import { Popup, Sticky } from 'semantic-ui-react';
+import Notifications from './Notifications';
 
 const Header = ({history}) => {
     const dispatch = useDispatch();
 
     const userLogin = useSelector(state=>state.userLogin);
     const {userInfo} = userLogin;
-
-
 
     const logoutHandler =()=>{
         dispatch(logout());
@@ -41,10 +41,18 @@ const Header = ({history}) => {
                             <Nav.Link><i className="fas fa-user"></i>AddClub</Nav.Link>
                             </LinkContainer>
                         }
-                        {userInfo && <LinkContainer to=''>
+                        {userInfo &&  <Popup trigger={<LinkContainer to=''>
                             <Nav.Link><i className="fas fa-bell fa-lg "></i></Nav.Link>
-                            </LinkContainer>
+                            </LinkContainer>} flowing hoverable>
+                                <Notifications />
+                              
+                            </Popup>
                         }
+
+                        {/* {userInfo && <LinkContainer to='/'>
+                            <Nav.Link><i className="fas fa-bell fa-lg ">    <Notifications /></i></Nav.Link>
+                            </LinkContainer>
+                        } */}
                         {userInfo?(
                             <NavDropdown title={userInfo.name} id='username'>
                                 <LinkContainer to="/profile">

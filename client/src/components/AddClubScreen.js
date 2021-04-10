@@ -22,6 +22,11 @@ const AddClub = ({location,history}) => {
     const [club_email, setClub_email] = useState('');
     const [message, setMessage] = useState('');
 
+
+    
+// Image part left till now upload image
+// ////////////////////////////////
+
     const dispatch = useDispatch ();
 
     const userLogin = useSelector(state=>state.userLogin);

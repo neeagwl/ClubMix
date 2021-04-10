@@ -10,16 +10,24 @@ const PostSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    data_type :{
+        type:String,
+        default:"Post"
+    },
+    likes:[
+         {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
+         }
+    ],
     photo:String,
     like:Number,
     createdAt:{type:Date , default: Date.now},
     // posted by club ka isliye kyuki sirf admin hi access kr skta club ka page toh 
     // user ka reference nahi diya sirf club se kaam chal jaega
     postedBy: {
-        id:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Club"
-        }
     }
 });
 mongoose.model("Post",PostSchema);

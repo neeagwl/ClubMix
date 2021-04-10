@@ -5,6 +5,8 @@ import {Carousel, Image, Row, Col} from 'react-bootstrap';
 import Loader from './Loader';
 import Message from './Message';
 import {getCurrEvents} from '../actions/EventAction';
+import Moment from 'react-moment';
+import 'moment-timezone';
 
 
 const EventCarousel = () => {
@@ -19,7 +21,6 @@ const EventCarousel = () => {
       }, [])
    
     return (
-      <div>
         <Carousel pause='hover' className='bg-dark' style={{height:"auto", position:"relative",justifyContent:"center"}}>
           {events && events.map((event) => {
             return (
@@ -32,8 +33,8 @@ const EventCarousel = () => {
                   <p  class="carousel-caption" style={{fontSize:"25px",position:"static",color:"whitesmoke", opacity:"1",marginBottom:"0px"}}>
                   {event.description}
                 </p>
-                <p class="carousel-caption" style={{position:"static",color:"whitesmoke", opacity:"1",marginBottom:"0px",paddingBottom:"0px"}}><b>START DATE :</b> {event.Start_date}</p>
-                <p class="carousel-caption" style={{position:"static",color:"whitesmoke", opacity:"1",marginTop:"0px"}}><b>END DATE :</b> {event.End_date}</p>
+                <p class="carousel-caption" style={{position:"static",color:"whitesmoke", opacity:"1",marginBottom:"0px",paddingBottom:"0px"}}><b>START DATE :</b> <Moment format="DD/MM/YYYY">{event.Start_date}</Moment></p>
+                <p class="carousel-caption" style={{position:"static",color:"whitesmoke", opacity:"1",marginTop:"0px"}}><b>END DATE :</b> <Moment format="DD/MM/YYYY">{event.End_date}</Moment></p>
                 <p class="carousel-caption" style={{position:"static",color:"whitesmoke", opacity:"1",marginTop:"0px",fontWeight:"900",marginBottom:"40px"}}>
                 This event is brought to you by     
                 <Link to={`/clubInfo/${event.postedBy._id}`} style={{color:"white"}}>
@@ -47,8 +48,6 @@ const EventCarousel = () => {
           })
         }
         </Carousel>
-      </div>
-
       )
       
 }
@@ -138,3 +137,4 @@ export default EventCarousel
 // }
 
 // export default EventCarousel
+

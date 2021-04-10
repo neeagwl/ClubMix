@@ -9,6 +9,10 @@ const EventSchema = new mongoose.Schema({
     event_website :{
         type:String
     },
+    data_type :{
+        type:String,
+        default:"Event"
+    },
     Start_date:{
         type:Date,
         required:true
@@ -25,10 +29,8 @@ const EventSchema = new mongoose.Schema({
     // posted by club ka isliye kyuki sirf admin hi access kr skta club ka page toh 
     // user ka reference nahi diya sirf club se kaam chal jaega
     postedBy: {
-        id:{
             type: mongoose.Schema.Types.ObjectId,
             ref: "Club"
-        }
     }
 },{
     timestamps:true,

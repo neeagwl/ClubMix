@@ -7,7 +7,7 @@ const IndexScreen = () => {
     return (
         <div style={{marginTop:"20px"}}>
             <EventCarousel/>
-            {/* <Button style={{marginLeft:"25rem", marginTop:"1rem"}} variant="info" active>See What's Happening...</Button> */}
+            <Button style={{margin:"auto"}}>See What's Happening...</Button>
             <IndexPost/>
         </div>
     )

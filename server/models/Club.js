@@ -6,6 +6,14 @@ const ClubSchema = new mongoose.Schema({
         type:String,
         required:true
     },
+    event_count:{
+       type:Number,
+       default:0
+    },
+    post_count:{
+        type:Number,
+        default:0
+    },
     description:{
         type:String,
         required:true

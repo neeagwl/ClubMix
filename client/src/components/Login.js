@@ -18,7 +18,7 @@ const Login = ({location, history})=>{
   const userLogin = useSelector(state=>state.userLogin);
   const {loading,error,userInfo} = userLogin;
 
-  const redirect = location.search? location.search.split('=')[1]:'/explore';
+  const redirect = location.search? location.search.split('=')[1]:'/';
 
     useEffect(() => {
         if(userInfo){
@@ -65,7 +65,7 @@ const Login = ({location, history})=>{
       <Row className="py-3">
           <Col>
               New Customer?{' '}
-              <Link to={redirect?`/signup/${redirect}`:'/signup'}>
+              <Link to='/signup'>
                   Register
               </Link>
           </Col>

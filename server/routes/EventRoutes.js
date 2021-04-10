@@ -43,9 +43,9 @@ router.get('/api/events/current',(req,res)=>{
     let current_date = new Date();
     // console.log(current_date);
     Event.find({$and : [{'End_date':{$gte : current_date}},{'Start_date':{$lte :current_date}}]})
-    .sort('Start_date').then(events =>{
+    .sort('Start_date').populate('postedBy',"_id name").then(events =>{
     // console.log("check");
-        // console.log(events);  
+       console.log(events);  
      return res.send(events);
         // res.json({message:"current events fetched successfully",events:events});
         // res.json({events:events});
@@ -61,7 +61,7 @@ router.get('/api/events/upcoming',(req,res)=>{
     let next_date = new Date(current_date.getTime() +(days * 24 * 60 * 60 * 1000))
     console.log(next_date);
     Event.find({$and:[{'Start_date':{$gte: current_date}},{'Start_date':{$lte: next_date}}]})
-    .sort('Start_date').then(events =>{
+    .sort('Start_date').populate('postedBy',"_id name").then(events =>{
         console.log(events);
         res.json({events});
     }).catch(err =>{
@@ -86,69 +86,83 @@ router.post('/api/addEvent',(req,res)=>{
         event_webiste:website
     });
 
+    Club.findOne({_id:clubId}).then(club =>{
+      club.event_count = club.event_count +1;
+      club.save();
+      console.log(club);
+  })
+
     Club.findOne({_id:clubId}).populate('subscribedBy')
         .then( club =>{
-
-        var users = [];
         
-        club.subscribedBy.forEach(function (eachuser) {
-          users.push(eachuser.email);
+      const message = `${club.name} created a new event ${event.Title}.` 
+      const notif = {
+           text: message,
+           createdAt: Date.now(),
+           Club_id: club.id,
+           img: club.logo
+      }
+       club.subscribedBy.forEach(function (eachuser) {
+           eachuser.notifications.push(notif);
+           eachuser.save();
         });
-        //email for notification of new job
-        if (users.length > 0) {
-          const output = `
-      <p>Greetings from ClubMix,</p>
-      <p> An event is soon going to be held organized by ${club.name} Club</p>
-      <h3>Event details</h3>
-      <h2>${Title}</h2>
-      <ul>
-      <li><b>Description</b>: ${description} </li>
-      <li><b>Start Date</b>: ${Start_Date} </li>
-      <li><b>End Date</b>: ${End_Date} </li>
-      </ul>
-      <p>
-      We are looking forward for your particiaption
-      </p>
-      <p>NOTE: You are receiving this mail because you are subscribed to this page </p>
-      `;
-          let transporter = nodemailer.createTransport({
-            // host: 'mail.google.com',
-            host: 'smtp.gmail.com',
-            port: 587,
-            secure: false,
-            //service: 'Gmail',
-            auth: {
-              user :process.env.PORTAL_MAIL_ID,
-              pass :process.env.PORTAL_MAIL_PASSWORD
-            },
-            tls: {
-              rejectUnauthorized: false
-            }
-          });
 
-          let mailOptions = {
-            from: '"ClubMix"',
-            to: users,
-            subject: 'Upcoming Event !!',
-            text: '',
-            html: output
-          };
-          transporter.sendMail(mailOptions, (error, info) => {
-            if (err) {
-              console.log(err);
-            }
-            console.log('Message sent: %s', info.messageId);
+    
+      //   //email for notification of new job
+      //   if (users.length > 0) {
+      //     const output = `
+      // <p>Greetings from ClubMix,</p>
+      // <p> An event is soon going to be held organized by ${club.name} Club</p>
+      // <h3>Event details</h3>
+      // <h2>${Title}</h2>
+      // <ul>
+      // <li><b>Description</b>: ${description} </li>
+      // <li><b>Start Date</b>: ${Start_Date} </li>
+      // <li><b>End Date</b>: ${End_Date} </li>
+      // </ul>
+      // <p>
+      // We are looking forward for your particiaption
+      // </p>
+      // <p>NOTE: You are receiving this mail because you are subscribed to this page </p>
+      // `;
+      //     let transporter = nodemailer.createTransport({
+      //       // host: 'mail.google.com',
+      //       host: 'smtp.gmail.com',
+      //       port: 587,
+      //       secure: false,
+      //       //service: 'Gmail',
+      //       auth: {
+      //         user :process.env.PORTAL_MAIL_ID,
+      //         pass :process.env.PORTAL_MAIL_PASSWORD
+      //       },
+      //       tls: {
+      //         rejectUnauthorized: false
+      //       }
+      //     });
+
+      //     let mailOptions = {
+      //       from: '"ClubMix"',
+      //       to: users,
+      //       subject: 'Upcoming Event !!',
+      //       text: '',
+      //       html: output
+      //     };
+      //     transporter.sendMail(mailOptions, (error, info) => {
+      //       if (err) {
+      //         console.log(err);
+      //       }
+      //       console.log('Message sent: %s', info.messageId);
             //console.log('Preview Url : %s', nodemailer.getTestMessageUrl(info));
             //res.redirect('/company/' + job.postedBy.id + '/viewjob')
         // console.log(event);
-          })
-        }
+          // })
+        // }
 
         }).catch ( err => {
             console.log(err);
         })
 
-    event.postedBy.id= clubId;
+    event.postedBy= clubId;
     event.save().then(event =>{
         console.log(event);
         res.json({message:"saved event successfully",event:{id:event._id}});
