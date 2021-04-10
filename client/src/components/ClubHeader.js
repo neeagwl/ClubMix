@@ -4,7 +4,8 @@ import './ClubHeader.css';
 import { Button, Container, Row, Col } from "reactstrap";
 
 
-function ClubHeader() {
+function ClubHeader({ClubProfile}) {
+  // console.log(ClubProfile);
   return (
     <>
       <div
@@ -23,10 +24,9 @@ function ClubHeader() {
         <Container className="d-flex align-items-center" fluid>
           <Row>
             <Col lg="7" md="10">
-              <h1 className="display-2 text-white">Club Name</h1>
+              <h1 className="display-2 text-white">{ClubProfile.name}</h1>
               <p className="text-white mt-0 mb-5 margin-left">
-                This is your profile page. You can see the progress you've made
-                with your work and manage your projects or assigned tasks
+             {ClubProfile.description}
               </p>
               <Button className="margin-left"
                 color="info"

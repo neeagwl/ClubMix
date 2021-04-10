@@ -44,15 +44,7 @@ function ClubProfile() {
               fetch(`/api/allClubPostandEvent/${clubId}`)
               .then(res=>res.json())
               .then(PostsandEvents=>{
-                // console.log(PostsandEvents);
-              //   console.log(PostsandEvents.events);
                 setPostandEvent(PostsandEvents.PostsandEvents);
-                // console.log(posts);
-                // setEvents(PostsandEvents.events);
-                // console.log(events);
-                // setPostandEvent(...posts,...events);
-                // console.log(PostsandEvents);
-                // setPostandEvent(posts.postEvent);
               })
 
               if(userInfo){
@@ -88,7 +80,7 @@ function ClubProfile() {
     <>
     {error && <Message variant='danger'>{error}</Message>}
     {loading && <Loader/>}
-      <ClubHeader />
+      { ClubProfile && <ClubHeader ClubProfile={ClubProfile} /> }
     { ClubProfile ?
       <Container className="mt--7" fluid>
         <Row>
@@ -101,7 +93,7 @@ function ClubProfile() {
                       <img
                         alt="..."
                         className="rounded-circle"
-                        src="https://i.pinimg.com/474x/bc/d4/ac/bcd4ac32cc7d3f98b5e54bde37d6b09e.jpg"
+                        src={ClubProfile.logo}
                       />
                     </a>
                   </div>
