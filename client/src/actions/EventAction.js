@@ -80,5 +80,3 @@ export const registerEvent = (heading,description,website,start_date,end_date,cl
     })
     }
 }
-
-  s

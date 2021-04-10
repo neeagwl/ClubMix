@@ -30,7 +30,7 @@ function ClubProfile() {
          const {clubId} = useParams ()
          
          const userLogin = useSelector(state=>state.userLogin);
-         const {userInfo} = userLogin;
+         const {loading, error,userInfo} = userLogin;
         
 
          useEffect(()=>{
@@ -55,21 +55,18 @@ function ClubProfile() {
                 // setPostandEvent(posts.postEvent);
               })
 
-              fetch(`/api/isUserSubscribe/${clubId}/${userInfo.user._id}`)
-              .then(res=>res.json())
-              .then(UserSubscribe => {
-                console.log(UserSubscribe);
-                setUserSubscribe(UserSubscribe.UserSubscribe);
-              })
-         },[])
+              if(userInfo){
+                fetch(`/api/isUserSubscribe/${clubId}/${userInfo.user._id}`)
+                .then(res=>res.json())
+                .then(UserSubscribe => {
+                  console.log(UserSubscribe);
+                  setUserSubscribe(UserSubscribe.UserSubscribe);
+                })
+              }
+            },[])
 
          const subscribeHandler =(e)=>{
           e.preventDefault();
-          // if(password!==confirmPassword){
-          //     setMessage('Password do not match!')
-          // }else{
-          //     dispatch(register(name,email,password,registration_no))
-          // }
           fetch(`/api/UserSubscribe/${clubId}/${userInfo.user._id}`)
           .then(res=>res.json())
           .then(UserSubscribe => {
@@ -80,11 +77,6 @@ function ClubProfile() {
   
    const unsubscribeHandler = (e)=>{
     e.preventDefault();
-    // if(password!==confirmPassword){
-    //     setMessage('Password do not match!')
-    // }else{
-    //     dispatch(register(name,email,password,registration_no))
-    // }
     fetch(`/api/UserUnsubscribe/${clubId}/${userInfo.user._id}`)
     .then(res=>res.json())
     .then(UserSubscribe => {
@@ -94,6 +86,8 @@ function ClubProfile() {
 
   return (
     <>
+    {error && <Message variant='danger'>{error}</Message>}
+    {loading && <Loader/>}
       <ClubHeader />
     { ClubProfile ?
       <Container className="mt--7" fluid>
@@ -154,17 +148,17 @@ function ClubProfile() {
                     <div className="card-profile-stats d-flex justify-content-center mt-md-5">
                       <div>
                         {/* events ka counts likhna hai */}
-                        <span className="heading">22</span>
+                        <span className="heading">{ClubProfile.event_count}</span>
                         <span className="description">Events</span>
                       </div>
                       <div>
                         {/* posts ka counts likhna hai */}
-                        <span className="heading">10</span>
+                        <span className="heading">{ClubProfile.post_count}</span>
                         <span className="description">Posts</span>
                       </div>
                       <div>
                         {/* subscribers ka count likhna hai */}
-                        <span className="heading">89</span>
+                        <span className="heading">{ClubProfile.subscribedBy.length}</span>
                         <span className="description">Subscribers</span>
                       </div>
                     </div>
@@ -179,24 +173,38 @@ function ClubProfile() {
                     <i className="ni location_pin mr-2" />
                     ALLAHABAD
                   </div>
-                  <div className="h5 mt-4">
-                    <i className="ni business_briefcase-24 mr-2" />
-                    {ClubProfile.date_of_establishment.substring(0,10)}
-                  </div>
+                    {ClubProfile.date_of_establishment && (
+                      <div className="h5 mt-4">
+                      <i className="ni business_briefcase-24 mr-2" />
+                      {ClubProfile.date_of_establishment.substring(0,10)}
+                      </div>)
+                    }
                   <div>
                     <i className="ni education_hat mr-2" />
                     MNNIT ALLAHABAD
                   </div>
                   <div className="text-left">
-                  <div>
-                  <a href="#" ><i class="fa fa-facebook"></i>{ClubProfile.facebook_link}</a>
-                  </div>
-                  <div>
-                  <a href="#" ><i class="fa fa-twitter"></i>{ClubProfile.twitter_link}</a>
-                  </div>
-                  <div>
-                  <a href="#" ><i class="fa fa-instagram"></i>{ClubProfile.insta_link}</a>
-                  </div>
+                    {
+                      ClubProfile.facebook_link && (
+                        <div>
+                          <a href="#" ><i class="fa fa-facebook"></i>{ClubProfile.facebook_link}</a>
+                        </div>
+                      )
+                    }
+                    {
+                      ClubProfile.twitter_link && (
+                        <div>
+                        <a href="#" ><i class="fa fa-twitter"></i>{ClubProfile.twitter_link}</a>
+                        </div>
+                      )
+                    }
+                    {
+                      ClubProfile.insta_link && (
+                        <div>
+                        <a href="#" ><i class="fa fa-instagram"></i>{ClubProfile.insta_link}</a>
+                        </div>
+                      )
+                    }
                   {/* linkedin link datatbase mein bhi add krna hoga */}
                   {/* <div>
                   <a href="#" ><i class="fa fa-linkedin"></i>{ClubProfile.linkedIn_link}</a>
@@ -241,11 +249,11 @@ function ClubProfile() {
                   </Col>
                 </Row>
               </CardHeader>
-              {/* <CardBody>
+              <CardBody>
                   <AddEventForm clubId={ClubProfile._id}/>
                   <AddPostForm clubId={ClubProfile._id}/>
  
-              </CardBody> */}
+              </CardBody>
               { PostandEvent.map(PostandEvent=>{
         
         if(PostandEvent.data_type == "Event")
@@ -266,7 +274,5 @@ function ClubProfile() {
     </>
   );
 }
-
-// Profile.layout = Admin;
 
 export default ClubProfile;
