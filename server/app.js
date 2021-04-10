@@ -14,6 +14,9 @@ require('./models/Post');
 app.use(express.json());
 
 app.use(require('./routes/UserRoutes'));
+app.use(require('./routes/ClubRoutes'));
+app.use(require('./routes/PostRoutes'));
+app.use(require('./routes/EventRoutes'));
 
 if( process.env.NODE_ENV ==='development' ){
     app.use(morgan('dev'));
