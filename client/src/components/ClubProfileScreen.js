@@ -267,7 +267,7 @@ function ClubProfile() {
                   <Col xs="8">
                     <h3 className="mb-0">View Posts and Events</h3>
                   </Col>
-                  {ClubProfile && userInfo && ClubProfile.clubAdmin.id === userInfo._id &&
+                  {/* {ClubProfile && userInfo && ClubProfile.clubAdmin.id === userInfo._id && */}
                   <Col className="text-right" xs="4">
                   <Modal
                       closeIcon
@@ -285,7 +285,7 @@ function ClubProfile() {
                     >
                     <AddEventForm clubId={ClubProfile._id} ModalHandler={ModalHandler}/>
                     </Modal>
-
+                                  
                     <Modal
                       closeIcon
                       open={open2}
@@ -302,7 +302,7 @@ function ClubProfile() {
                      <AddPostForm clubId={ClubProfile._id}  ModalHandler={ModalHandler}/>
                     </Modal>
                   </Col>
-                  }
+                  {/* } */}
                   {/* {ClubProfile && userInfo && ClubProfile.clubAdmin.id === userInfo._id &&
                       <Col className="text-right" xs="4">
                       <Button className="margin-right"
