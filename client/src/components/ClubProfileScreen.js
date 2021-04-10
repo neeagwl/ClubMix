@@ -125,7 +125,7 @@ function ClubProfile() {
     { ClubProfile ?
       <Container className="mt--7" fluid>
         <Row>
-          <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
+          <Col className="order-xl-2 mb-5 mb-xl-0" xl="5">
             <Card className="card-profile shadow">
               <Row className="justify-content-center">
                 <Col className="order-lg-2" lg="3">
@@ -150,7 +150,7 @@ function ClubProfile() {
                       color="primary"
                       href="#pablo"
                       onClick={unsubscribeHandler}
-                      size="sm"
+                      size="lg"
                       style={{opacity:"0.7"}}
                     >
                     UnSubscribe
@@ -160,7 +160,7 @@ function ClubProfile() {
                             color="danger"
                             href="#pablo"
                             onClick={subscribeHandler}
-                            size="sm"
+                            size="lg"
                           >
                           Subscribe
                           </Button>
@@ -203,24 +203,19 @@ function ClubProfile() {
                   </div>
                 </Row>
                 <div className="text-center">
-                  <h3>
-                    Club Name
-                    <span className="font-weight-light"> {ClubProfile.name}</span>
-                  </h3>
-                  <div className="h5 font-weight-300">
-                    <i className="ni location_pin mr-2" />
-                    ALLAHABAD
-                  </div>
+                    <span className="club-name"> {ClubProfile.name} Club</span>
+                   
                     {ClubProfile.date_of_establishment && (
-                      <div className="h5 mt-4">
-                      <i className="ni business_briefcase-24 mr-2" />
+                      <div className="head">
+                      <i class="fas fa-calendar-day fa-sm"></i>
                       {ClubProfile.date_of_establishment.substring(0,10)}
                       </div>)
                     }
-                  <div>
-                    <i className="ni education_hat mr-2" />
+                    <i class="fas fa-map-marked-alt fa-2x"></i>
+                  <span className="location">
+                  
                     MNNIT ALLAHABAD
-                  </div>
+                  </span>
                   <div className="text-left">
                     {
                       ClubProfile.facebook_link && (
@@ -249,8 +244,8 @@ function ClubProfile() {
                   </div> */}
                   </div>
                   <hr className="my-4" />
-                  <p>
-                   {ClubProfile.description.substring}
+                  <p style={{fontSize:'15px'}}>
+                   {ClubProfile.description.substring(0,20)}
                   </p>
                   {/* iska hisab samjh ni aaya */}
                   <a href="#pablo" onClick={(e) => e.preventDefault()}>
@@ -260,7 +255,7 @@ function ClubProfile() {
               </CardBody>
             </Card>
           </Col>
-          <Col className="order-xl-1" xl="8">
+          <Col className="order-xl-1" xl="7">
             <Card className="bg-secondary shadow">
               <CardHeader className="bg-white border-0">
                 <Row className="align-items-center">
@@ -276,7 +271,7 @@ function ClubProfile() {
                       color="primary"
                       href="#pablo"
                       onClick={(e) => e.preventDefault()}
-                      size="sm"
+                      size="lg"
                     >
                     ADD EVENT
                   </Button>}                     
@@ -293,7 +288,7 @@ function ClubProfile() {
                         color="primary"
                         href="#pablo"
                         onClick={(e) => e.preventDefault()}
-                        size="sm"
+                        size="lg"
                       >ADD POST
                       </Button>}                     
                      onClose={() => setOpen2(false)}
@@ -330,7 +325,7 @@ function ClubProfile() {
               </CardHeader>
                   
                 
-            <CardBody>
+            <CardBody className="post-card">
               { PostandEvent.map(PostandEvent=>{
         
         if(PostandEvent.data_type == "Event")

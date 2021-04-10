@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Moment from 'react-moment';
 import 'moment-timezone';
+import './Post.css';
 
 const Post = ({post}) => {
   console.log(post);
@@ -34,10 +35,10 @@ useEffect(()=>{
     <div className="content" style={{ display: 'flex'}}>
    
     <img className="ui avatar image" src="https://ict4kids.files.wordpress.com/2013/05/mrc-2.png" />
-      <div className="header" style={{marginLeft:'5px',marginTop:'4px'}}>Admin added a Post</div>
-      <div className="right floated meta" style={{ right:'10px',position:'absolute'}}><Moment fromNow>{post.createdAt}</Moment></div>
+      <div className="header post-header" style={{marginLeft:'10px',marginTop:'7px',}}>Admin added a Post</div>
+      <div className="right floated" style={{ right:'10px',position:'absolute'}}><Moment fromNow>{post.createdAt}</Moment></div>
       </div>
-  <div class="content">
+  <div class="content card-cont">
       <div class="header">{post.heading}</div>
       {/* <div class="meta">
         <a>Friends</a>
