@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 import './ClubProfile.css'
 // reactstrap components
@@ -58,14 +59,27 @@ function ClubProfile() {
               }
             },[])
 
-         const subscribeHandler =(e)=>{
+         const subscribeHandler =async (e)=>{
           e.preventDefault();
-          fetch(`/api/UserSubscribe/${clubId}/${userInfo.user._id}`)
-          .then(res=>res.json())
-          .then(UserSubscribe => {
-            console.log(UserSubscribe)
-            setUserSubscribe(true);
-          })
+
+          const article = {  USER_ID: userInfo.user._id, ITEM_ID: ClubProfile.name };
+          console.log(article)
+          const config = {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin' :'*'
+            },
+          }
+          const {data} = await axios.post('http://4f0d1c6372b2.ngrok.io/predict',
+                                            article, config)
+          console.log(data);                                 
+
+          // fetch(`/api/UserSubscribe/${clubId}/${userInfo.user._id}`)
+          // .then(res=>res.json())
+          // .then(UserSubscribe => {
+          //   console.log(UserSubscribe)
+          //   setUserSubscribe(true);
+          // })
   } 
   
    const unsubscribeHandler = (e)=>{
@@ -103,7 +117,7 @@ function ClubProfile() {
               <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                 <div className="d-flex justify-content-between">
                   { ClubProfile && userInfo && ClubProfile.clubAdmin.id !== userInfo._id &&
-                  <div>
+                  <>
                      {UserSubscribe ? 
                       <Button
                       className="mr-4"
@@ -125,7 +139,7 @@ function ClubProfile() {
                           Subscribe
                           </Button>
             }
-                  </div>
+                  </>
 
                   }
                     
