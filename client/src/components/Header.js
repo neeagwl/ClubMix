@@ -36,8 +36,13 @@ const Header = ({history}) => {
                         <LinkContainer to='/about'>
                             <Nav.Link>About Us</Nav.Link>
                         </LinkContainer>
+                     
                         {userInfo && <LinkContainer to='/addClub'>
                             <Nav.Link><i className="fas fa-user"></i>AddClub</Nav.Link>
+                            </LinkContainer>
+                        }
+                        {userInfo && <LinkContainer to=''>
+                            <Nav.Link><i className="fas fa-bell fa-lg "></i></Nav.Link>
                             </LinkContainer>
                         }
                         {userInfo?(
@@ -60,6 +65,7 @@ const Header = ({history}) => {
                             </Nav>
                             )
                         }
+                    
                     </Nav>
                 </Navbar.Collapse>
                 </Container>

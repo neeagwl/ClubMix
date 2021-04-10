@@ -35,10 +35,10 @@ const EventCarousel = () => {
                 <p class="carousel-caption" style={{position:"static",color:"whitesmoke", opacity:"1",marginBottom:"0px",paddingBottom:"0px"}}><b>START DATE :</b> {event.Start_date}</p>
                 <p class="carousel-caption" style={{position:"static",color:"whitesmoke", opacity:"1",marginTop:"0px"}}><b>END DATE :</b> {event.End_date}</p>
                 <p class="carousel-caption" style={{position:"static",color:"whitesmoke", opacity:"1",marginTop:"0px",fontWeight:"900",marginBottom:"40px"}}>
-                This event is brought to you by    
-                {/* <Link to='/clubInfo/:clubId' style={{color:"white"}}> */}
-                     {/* { ev.postedBy.name}  */}
-                  {/* </Link> */}
+                This event is brought to you by     
+                <Link to={`/clubInfo/${event.postedBy._id}`} style={{color:"white"}}>
+                      { event.postedBy.name}
+                  </Link>
                 </p>
                 </Carousel.Caption>
               {/* </Link> */}
