@@ -1,11 +1,14 @@
 import React from "react";
 import './ClubHeader.css';
+import { useSelector } from 'react-redux';
 // reactstrap components
 import { Button, Container, Row, Col } from "reactstrap";
 
 
 function ClubHeader({ClubProfile}) {
   // console.log(ClubProfile);
+  const userLogin = useSelector(state=>state.userLogin);
+  const {loading, error,userInfo} = userLogin;
   return (
     <>
       <div
@@ -28,6 +31,7 @@ function ClubHeader({ClubProfile}) {
               <p className="text-white mt-0 mb-5 margin-left">
              {ClubProfile.description}
               </p>
+              { ClubProfile && userInfo && ClubProfile.clubAdmin.id !== userInfo._id &&
               <Button className="margin-left"
                 color="info"
                 href="#pablo"
@@ -35,6 +39,7 @@ function ClubHeader({ClubProfile}) {
               >
                 Edit profile
               </Button>
+              }
             </Col>
           </Row>
         </Container>

@@ -146,7 +146,7 @@ router.post('/api/addPost',(req,res)=>{
     }).catch ( err => {
         console.log(err);
     })
-    post.postedBy._id = clubId;
+    // post.postedBy._id = clubId;
     post.postedBy= clubId;
     Club.findOne({_id:clubId}).then(club =>{
         // console.log(typeof(post_count));

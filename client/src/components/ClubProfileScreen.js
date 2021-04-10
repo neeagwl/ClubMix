@@ -225,21 +225,21 @@ function ClubProfile() {
                     {
                       ClubProfile.facebook_link && (
                         <div>
-                          <a href="#" ><i class="fa fa-facebook"></i>{ClubProfile.facebook_link}</a>
+                          <a href={ClubProfile.facebook_link} ><i class="fa fa-facebook"></i>{ClubProfile.facebook_link}</a>
                         </div>
                       )
                     }
                     {
                       ClubProfile.twitter_link && (
                         <div>
-                        <a href="#" ><i class="fa fa-twitter"></i>{ClubProfile.twitter_link}</a>
+                        <a href={ClubProfile.twitter_link} ><i class="fa fa-twitter"></i>{ClubProfile.twitter_link}</a>
                         </div>
                       )
                     }
                     {
                       ClubProfile.insta_link && (
                         <div>
-                        <a href="#" ><i class="fa fa-instagram"></i>{ClubProfile.insta_link}</a>
+                        <a href={ClubProfile.insta_link} ><i class="fa fa-instagram"></i>{ClubProfile.insta_link}</a>
                         </div>
                       )
                     }
@@ -267,9 +267,8 @@ function ClubProfile() {
                   <Col xs="8">
                     <h3 className="mb-0">View Posts and Events</h3>
                   </Col>
-                  {/* <Col className="text-right" xs="4"> */}
-                  {/* {ClubProfile && userInfo && ClubProfile.clubAdmin.id === userInfo._id &&
-                  <>
+                  { ClubProfile && userInfo && ClubProfile.clubAdmin.id === userInfo.user._id && 
+                   <Col className="text-right" xs="4">
                   <Modal
                       closeIcon
                       open={open}
@@ -286,7 +285,7 @@ function ClubProfile() {
                     >
                     <AddEventForm clubId={ClubProfile._id} ModalHandler={ModalHandler}/>
                     </Modal>
-
+                                  
                     <Modal
                       closeIcon
                       open={open2}
@@ -302,10 +301,11 @@ function ClubProfile() {
                     >
                      <AddPostForm clubId={ClubProfile._id}  ModalHandler={ModalHandler}/>
                     </Modal>
-                  </>
-                  } */}
-                  {/* </Col> */}
-                  {ClubProfile && userInfo && ClubProfile.clubAdmin.id == userInfo.user._id &&
+                  </Col> 
+                  }
+                  
+
+                 {/* {ClubProfile && userInfo && ClubProfile.clubAdmin.id == userInfo._id &&
                       <Col className="text-right" xs="4">
                       <Button className="margin-right"
                           color="primary"
@@ -324,7 +324,7 @@ function ClubProfile() {
                           ADD POST
                         </Button>
                       </Col>
-                  }
+                  }  */}
                  
                 </Row>
               </CardHeader>

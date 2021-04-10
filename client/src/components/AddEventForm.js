@@ -20,8 +20,9 @@ import {
   import { Button, Header, Icon, Modal } from 'semantic-ui-react';
 import './PostForm.css';
 
-const AddEventForm = ({history,clubId,ModalHandler}) => {
+const AddEventForm = ({clubId,ModalHandler}) => {
     // console.log(clubId);
+    // const history = useHistory();
     const [heading,setHeading]= useState("");
     const[description,setDescription] = useState("");
     const[website,setWebsite]=useState("");
@@ -37,11 +38,11 @@ const AddEventForm = ({history,clubId,ModalHandler}) => {
     const eventRegister = useSelector(state=>state.eventRegister);
     const {error:errorEvent,eventInfo} = eventRegister;
 
-    useEffect(()=>{
-        if(!userInfo){
-            history.push('/')
-        }
-    },[history]);
+    // useEffect(()=>{
+    //     if(!userInfo){
+    //         history.push('/')
+    //     }
+    // },[history]);
 
     const submitHandler=()=>{
         console.log(heading);
