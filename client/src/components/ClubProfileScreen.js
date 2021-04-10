@@ -104,23 +104,36 @@ function ClubProfile() {
         
 
             console.log(data); 
-           var word = data.split("\"");
-              var res=[];
-                var rebels1 = allClub.filter(function (c){
-                      return  c._id == word[1];
-                })
-                var rebels2 = allClub.filter(function (c){
-                  return  c._id == word[3];
-                   })
-            var rebels3 = allClub.filter(function (c){
-              return  c._id == word[5];
-                })
-                res = [... rebels1,...rebels2,...rebels3]
-              setRecommendedClub(res);                           
+          //  var word = data.split("\"");
+          //     var res=[];
+          //       var rebels1 = allClub.filter(function (c){
+          //             return  c._id == word[1];
+          //       })
+          //       var rebels2 = allClub.filter(function (c){
+          //         return  c._id == word[3];
+          //          })
+          //   var rebels3 = allClub.filter(function (c){
+          //     return  c._id == word[5];
+          //       })
+          //       res = [... rebels1,...rebels2,...rebels3]
+          //     setRecommendedClub(res);                           
         
           fetch(`/api/UserSubscribe/${clubId}/${userInfo.user._id}`)
           .then(res=>res.json())
           .then(UserSubscribe => {
+            var word = data.split("\"");
+            var res=[];
+              var rebels1 = allClub.filter(function (c){
+                    return  c._id == word[1];
+              })
+              var rebels2 = allClub.filter(function (c){
+                return  c._id == word[3];
+                 })
+          var rebels3 = allClub.filter(function (c){
+            return  c._id == word[5];
+              })
+              res = [... rebels1,...rebels2,...rebels3]
+            setRecommendedClub(res);  
             console.log(UserSubscribe)
             setUserSubscribe(true);
           })
@@ -132,6 +145,7 @@ function ClubProfile() {
           })
   } 
    
+  console.log(recommendedClub);
   
 
   
