@@ -16,7 +16,6 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const  requireLogin = require('../middleware/requireLogin');
 
 router.post('/api/signup',(req,res)=>{
-    console.log(req.body);
     const {name,email,password,registration_no} = req.body;
     if(!email || !password || !name || !registration_no)
     {
@@ -34,8 +33,11 @@ router.post('/api/signup',(req,res)=>{
                 password:hashedpassword,
                 registration_no
             });
+            const newUser = {_id:user._id,name
+                ,email,registration_no}
+                console.log(newUser);
             user.save().then(user=>{
-                res.json({message:"saved successfully", email, registration_no})
+                res.json({message:"saved successfully", user:newUser})
             }).catch(err=>{
                 console.log(err);
             });

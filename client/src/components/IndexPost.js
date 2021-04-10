@@ -115,7 +115,7 @@
 
 import React,{useState,useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {Container, Row, Col, Jumbotron, Image, ListGroup} from 'react-bootstrap';
+import {Container, Row, Col, Jumbotron, Image, ListGroup, Button} from 'react-bootstrap';
 import {getLatestPosts} from '../actions/PostAction';
 import Message from './Message';
 import Loader from './Loader';
@@ -129,7 +129,7 @@ const IndexPost = () => {
     
     const userLogin = useSelector(state=>state.userLogin);
     const {loading,error,userInfo} = userLogin;
-//   console.log(userInfo.user._id);
+  console.log(userInfo);
       useEffect(() => {
             fetch('/api/posts/latest')
             .then(res => res.json())
@@ -192,7 +192,7 @@ const IndexPost = () => {
 
 
     const jumbotron ={
-
+        background:"#dde9f0",
         marginTop:"2.5rem",
         marginLeft:"2rem",
         padding :"0",
@@ -211,7 +211,8 @@ const IndexPost = () => {
     
     const rightDiv = {
         background:"#dde9f0",
-        marginRight :"2rem"
+        marginRight :"2rem",
+        marginTop:"1rem"
     }
 
     return (
@@ -219,14 +220,14 @@ const IndexPost = () => {
             <Row >
                 <Col sm={12} md={7}>
                     <Jumbotron style={jumbotron} className="px-4">
-                        <h3 style={{textAlign:"left"}}>All Posts</h3>
+                        <Button style={{textAlign:"left", width:"100%"}} variant="outline-info" ><h5>All Posts</h5></Button>
                         <ListGroup variant="flush">
-                            { latestPosts.map((post)=>{
+                            {latestPosts && latestPosts.map((post)=>{
                                 return (
                                 <ListGroup.Item key={post._id}>
                                     <Row>
                                         <Col>
-                                            <h4 style={{color:"#2437a3"}}>{post.heading}</h4>
+                                            <h6 style={{color:"black"}}>{post.heading}</h6>
                                             {/* <h4>{post.postedBy._id}</h4> */}
                                              {/* //Also Show club name */}
                                              <a href={`/clubInfo/${post.postedBy._id}` } >{post.postedBy.name}</a>
@@ -264,15 +265,15 @@ const IndexPost = () => {
                 <Col>
                         <div style={rightDiv}>
                             <div>
-                            <h3 style={{marginLeft:"1rem"}}>Upcoming Events!</h3>
+                            <Button style={{ width:"100%"}} variant="outline-info" ><h5>Upcoming Events!</h5></Button>
                             </div>
                             <ListGroup>
-                                { upcomingEvents.map(event=>{
+                                { upcomingEvents && upcomingEvents.map(event=>{
                                     return (
                                     <ListGroup.Item >
                                         <Row>
                                             <Col>
-                                                <h4>{event.Title}</h4>
+                                                <h5>{event.Title}</h5>
                                             </Col>
                                             <Col style={{textAlign:"right", }}>
                                              {/* <a href={`/clubInfo/${event.postedBy._id}` } >{event.postedBy.name}</a> */}

@@ -16,10 +16,14 @@ const SignUp = ({location,history}) => {
     const [ registration_no,setRegistration_no] = useState("");
 
     const dispatch = useDispatch ();
-    const userLogin = useSelector(state=>state.userLogin);
-    const {loading,error,userInfo} = userLogin;
+    // const userLogin = useSelector(state=>state.userLogin);
+    // const {loading,error,userInfo} = userLogin;
 
-    const redirect = location.search? location.search.split('=')[1]:'/';
+    const userRegister = useSelector(state=>state.userRegister);
+    const {error, loading,userInfo} = userRegister;
+
+    const redirect = '/login';
+    console.log(userInfo);
 
     useEffect(() => {
         if(userInfo){

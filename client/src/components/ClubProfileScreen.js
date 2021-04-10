@@ -28,6 +28,7 @@ function ClubProfile() {
          const [ClubProfile,setClubProfile] = useState(null);
          const [PostandEvent,setPostandEvent] = useState([]);
          const [UserSubscribe, setUserSubscribe] = useState(false);
+         const [flag, setFlag] = useState(false);
          const {clubId} = useParams ()
          const [open, setOpen] = useState(false);
          const [open2, setOpen2] = useState(false);
@@ -141,28 +142,33 @@ function ClubProfile() {
               </Row>
               <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
                 <div className="d-flex justify-content-between">
-                  {UserSubscribe ? 
-                          <Button
-                          className="mr-4"
-                          color="primary"
-                          href="#pablo"
-                          onClick={unsubscribeHandler}
-                          size="sm"
-                          style={{opacity:"0.7"}}
-                        >
-                        UnSubscribe
-                        </Button> :
-                                <Button
-                                className="mr-4"
-                                color="danger"
-                                href="#pablo"
-                                onClick={subscribeHandler}
-                                size="sm"
-                              >
-                              Subscribe
-                              </Button>
-                }
-          
+                  { ClubProfile && userInfo && ClubProfile.clubAdmin.id !== userInfo._id &&
+                  <div>
+                     {UserSubscribe ? 
+                      <Button
+                      className="mr-4"
+                      color="primary"
+                      href="#pablo"
+                      onClick={unsubscribeHandler}
+                      size="sm"
+                      style={{opacity:"0.7"}}
+                    >
+                    UnSubscribe
+                    </Button> :
+                            <Button
+                            className="mr-4"
+                            color="danger"
+                            href="#pablo"
+                            onClick={subscribeHandler}
+                            size="sm"
+                          >
+                          Subscribe
+                          </Button>
+            }
+                  </div>
+
+                  }
+                    
                   {/* <Button
                     className="float-right"
                     color="default"
@@ -261,6 +267,7 @@ function ClubProfile() {
                   <Col xs="8">
                     <h3 className="mb-0">View Posts and Events</h3>
                   </Col>
+                  {ClubProfile && userInfo && ClubProfile.clubAdmin.id === userInfo._id &&
                   <Col className="text-right" xs="4">
                   <Modal
                       closeIcon
@@ -295,6 +302,28 @@ function ClubProfile() {
                      <AddPostForm clubId={ClubProfile._id}  ModalHandler={ModalHandler}/>
                     </Modal>
                   </Col>
+                  }
+                  {/* {ClubProfile && userInfo && ClubProfile.clubAdmin.id === userInfo._id &&
+                      <Col className="text-right" xs="4">
+                      <Button className="margin-right"
+                          color="primary"
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                          size="sm"
+                        >
+                          ADD EVENT
+                        </Button>
+                        <Button
+                          color="primary"
+                          href="#pablo"
+                          onClick={(e) => e.preventDefault()}
+                          size="sm"
+                        >
+                          ADD POST
+                        </Button>
+                      </Col>
+                  } */}
+                 
                 </Row>
               </CardHeader>
                   

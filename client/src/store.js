@@ -24,23 +24,23 @@ JSON.parse(
     :null
   
 
-const clubInfoFromStorage = localStorage.getItem('clubInfo')? 
-    JSON.parse(
-        localStorage.getItem('clubInfo'))
-        :null
+// const clubInfoFromStorage = localStorage.getItem('clubInfo')? 
+//     JSON.parse(
+//         localStorage.getItem('clubInfo'))
+//         :null
 
-const postInfoFromStorage = localStorage.getItem('postInfo')? 
-    JSON.parse(
-        localStorage.getItem('postInfo'))
-        :null
+// const postInfoFromStorage = localStorage.getItem('postInfo')? 
+//     JSON.parse(
+//         localStorage.getItem('postInfo'))
+//         :null
     
         
-const eventInfoFromStorage = localStorage.getItem('eventInfo')? 
-JSON.parse(
-    localStorage.getItem('eventInfo'))
-    :null
+// const eventInfoFromStorage = localStorage.getItem('eventInfo')? 
+// JSON.parse(
+//     localStorage.getItem('eventInfo'))
+//     :null
 
-        // iske aage ka dekh le
+        // iske aage ka dekh le 
 const initialState={
     
     userLogin: {userInfo: userInfoFromStorage},
