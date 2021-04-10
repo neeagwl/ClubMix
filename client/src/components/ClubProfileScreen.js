@@ -33,7 +33,8 @@ function ClubProfile() {
          const {clubId} = useParams ()
          const [open, setOpen] = useState(false);
          const [open2, setOpen2] = useState(false);
-
+         const [allClub,setAllClub] = useState([]);
+         const [recommendedClub,setRecommendedClub] = useState([]);
          const userLogin = useSelector(state=>state.userLogin);
          const {loading, error,userInfo} = userLogin;
         
@@ -47,6 +48,7 @@ function ClubProfile() {
               .then(club =>{
                 console.log(club);
                 setClubProfile(club.club);
+                setAllClub(club.clubs);
               })
               .catch(err=> {
                 console.log(err)
@@ -97,29 +99,41 @@ function ClubProfile() {
               'Access-Control-Allow-Origin' :'*'
             },
           }
-          const {data} = await axios.post('http://4f0d1c6372b2.ngrok.io/predict',
+          const {data} = await axios.post('http://221f916469d5.ngrok.io/predict',
                                             article, config)
-          console.log(data);                                 
+        
 
-          // fetch(`/api/UserSubscribe/${clubId}/${userInfo.user._id}`)
-          // .then(res=>res.json())
-          // .then(UserSubscribe => {
-          //   console.log(UserSubscribe)
-          //   setUserSubscribe(true);
-          // })
-          // fetch(`/api/UserSubscribe/${clubId}/${userInfo.user._id}`)
-          // .then(res=>res.json())
-          // .then(UserSubscribe => {
-          //   console.log(UserSubscribe)
-          //   setUserSubscribe(true);
-          // })
-          // .catch(err=> {
-          //   console.log(err)
-          // })
-          // .catch(err =>{
-          // console.log(err)
-          // })
+            console.log(data); 
+           var word = data.split("\"");
+              var res=[];
+                var rebels1 = allClub.filter(function (c){
+                      return  c._id == word[1];
+                })
+                var rebels2 = allClub.filter(function (c){
+                  return  c._id == word[3];
+                   })
+            var rebels3 = allClub.filter(function (c){
+              return  c._id == word[5];
+                })
+                res = [... rebels1,...rebels2,...rebels3]
+              setRecommendedClub(res);                           
+        
+          fetch(`/api/UserSubscribe/${clubId}/${userInfo.user._id}`)
+          .then(res=>res.json())
+          .then(UserSubscribe => {
+            console.log(UserSubscribe)
+            setUserSubscribe(true);
+          })
+          .catch(err=> {
+            console.log(err)
+          })
+          .catch(err =>{
+          console.log(err)
+          })
   } 
+   
+  
+
   
    const unsubscribeHandler = (e)=>{
     e.preventDefault();

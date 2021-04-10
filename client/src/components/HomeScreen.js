@@ -1,6 +1,6 @@
 import React from 'react'
 import Video from './Video';
-import video from '../assets/video.mp4';
+import video from '../assets/video3.mp4';
 import {Button} from 'react-bootstrap';
 
 const videoStyle = {
