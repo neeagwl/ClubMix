@@ -62,3 +62,12 @@ const ClubSchema = new mongoose.Schema({
     timestamps:true,
 });
 mongoose.model("Club",ClubSchema);
+// Basketball - 101
+// Football - 102
+// Footprints - 103
+// Arts - 104
+// Dance - 105
+// Robotics - 106
+// CC - 107
+// Enactus - 108
+// Rotaract - 109
