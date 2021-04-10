@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Moment from 'react-moment';
 import 'moment-timezone';
 
 const Post = ({post}) => {
   console.log(post);
+
+const [postdata,setPostData] = useState();
+useEffect(()=>{
+  setPostData(post);
+},[])
+  const makeComment = (text,postId) =>{
+    fetch('/api/comment',{
+      method:"put",
+      headers:{
+       "Content-Type":"application/json",
+       "Authorization":"Bearer "+localStorage.getItem("jwt")
+   },
+   body:JSON.stringify({
+       postId:postId,
+       text:text
+   })
+   }).then(res => res.json())
+   .then(result =>{
+     console.log(result);
+     setPostData(result);
+   }).catch(err=>{
+     console.log(err);
+   })
+   }
     return (
         <div className="ui card">
     
@@ -40,6 +64,34 @@ const Post = ({post}) => {
       <input type="text" placeholder="Add Comment..."></input>
     </div>
   </div> */}
+   <div className="content">
+    <span className="right floated">
+      <i className="heart outline like icon"></i>
+      <p>Likes: {post.likes.length}</p>
+    </span>
+    <i className="comment icon"></i>
+    <p>Comments: {post.comments.length}</p>
+  </div>
+  <div>
+  {
+     postdata && postdata.comments.map(record =>{
+        return (
+          <h6 key = {record._id}><span style={{fontWeight:"500"}}>{record.postedBy.name}</span>{record.text}</h6>
+        )
+      })
+    }
+  </div>
+  <div className="extra content">
+    <div className="ui large transparent left icon input">
+      {/* <i className="heart outline icon"></i> */}
+      <form onSubmit = {(e)=>{ 
+        e.preventDefault();
+        makeComment(e.target[0].value,post._id)
+      }}>
+      <input type="text" placeholder="Add Comment..."></input>
+       </form>
+      </div>
+  </div> 
 </div>
 
     )

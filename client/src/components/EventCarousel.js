@@ -37,9 +37,10 @@ const EventCarousel = () => {
                 <p class="carousel-caption" style={{position:"static",color:"whitesmoke", opacity:"1",marginTop:"0px"}}><b>END DATE :</b> <Moment format="DD/MM/YYYY">{event.End_date}</Moment></p>
                 <p class="carousel-caption" style={{position:"static",color:"whitesmoke", opacity:"1",marginTop:"0px",fontWeight:"900",marginBottom:"40px"}}>
                 This event is brought to you by     
-                <Link to={`/clubInfo/${event.postedBy._id}`} style={{color:"white"}}>
-                      { event.postedBy.name}
+               <b> <Link to={`/clubInfo/${event.postedBy._id}`} style={{color:"white"}}>
+                      { event.postedBy.name.toUpperCase()}
                   </Link>
+                  </b>
                 </p>
                 </Carousel.Caption>
               {/* </Link> */}
