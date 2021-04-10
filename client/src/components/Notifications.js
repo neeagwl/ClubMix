@@ -20,6 +20,12 @@ const Notifications = () => {
           console.log(notifs.notifs);
           setNotifs(notifs.notifs);
         })
+        .catch(err => {
+          console.log(err)
+        })
+        .catch(err=>{
+          console.log(err)
+        })
 
     },[])
 
@@ -39,9 +45,9 @@ return (
                             <Nav.Link >
                   <Feed>
                 <Feed.Event>
-                <Feed.Label image={notif.img} />
+                <Feed.Label className="feed-img" image={notif.img} />
                 <Feed.Content> 
-                  <Feed.Date content={<Moment fromNow>{notif.createdAt}</Moment>} />
+                  <Feed.Date className="feed-date" content={<Moment fromNow>{notif.createdAt}</Moment>} />
                   <Feed.Summary>
                    {notif.text} 
                    {/* For more details Check here <a href={'/clubInfo/'+notif.Club_id}></a> */}
@@ -51,7 +57,9 @@ return (
               </Feed>
               </Nav.Link>
                         </LinkContainer>
+                        <hr className="my-3" />
               </div>
+           
                 )
             })
             }

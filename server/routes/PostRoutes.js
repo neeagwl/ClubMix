@@ -84,7 +84,7 @@ router.post('/api/addPost',(req,res)=>{
   const notif = {
        text: message,
        createdAt: Date.now(),
-       Club_id: club.id,
+       Club_id: club._id,
        img: club.logo
   }
    club.subscribedBy.forEach(function (eachuser) {
@@ -146,7 +146,7 @@ router.post('/api/addPost',(req,res)=>{
     }).catch ( err => {
         console.log(err);
     })
-    post.postedBy.id = clubId;
+    post.postedBy._id = clubId;
     post.postedBy= clubId;
     Club.findOne({_id:clubId}).then(club =>{
         // console.log(typeof(post_count));
