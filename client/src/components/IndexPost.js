@@ -129,7 +129,7 @@ const IndexPost = () => {
     
     const userLogin = useSelector(state=>state.userLogin);
     const {loading,error,userInfo} = userLogin;
-//   console.log(userInfo.user._id);
+  console.log(userInfo);
       useEffect(() => {
             fetch('/api/posts/latest')
             .then(res => res.json())
@@ -222,7 +222,7 @@ const IndexPost = () => {
                     <Jumbotron style={jumbotron} className="px-4">
                         <Button style={{textAlign:"left", width:"100%"}} variant="outline-info" ><h5>All Posts</h5></Button>
                         <ListGroup variant="flush">
-                            { latestPosts.map((post)=>{
+                            {latestPosts && latestPosts.map((post)=>{
                                 return (
                                 <ListGroup.Item key={post._id}>
                                     <Row>
@@ -268,7 +268,7 @@ const IndexPost = () => {
                             <Button style={{ width:"100%"}} variant="outline-info" ><h5>Upcoming Events!</h5></Button>
                             </div>
                             <ListGroup>
-                                { upcomingEvents.map(event=>{
+                                { upcomingEvents && upcomingEvents.map(event=>{
                                     return (
                                     <ListGroup.Item >
                                         <Row>
