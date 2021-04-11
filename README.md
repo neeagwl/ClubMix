@@ -1,7 +1,7 @@
 ## Introduction:
   A website where all the clubs of the college come together such that the students of college (and upcoming students) can easily get all the information regarding the clubs and their events. 
   
-## CORECT Demo Video Link:
+## CORRECT Demo Video Link:
   <a href="https://drive.google.com/file/d/1YM0xndAuhAo0oxc_We_bShZ3BFuNjYeJ/view">https://drive.google.com/file/d/1YM0xndAuhAo0oxc_We_bShZ3BFuNjYeJ/view</a>
   
 ## Presentation Link:
