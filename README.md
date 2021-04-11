@@ -1,5 +1,6 @@
 ## Introduction:
-  A website where all the clubs of the college come together such that the students of college (and upcoming students) can easily get all the information regarding the clubs and their events. 
+  A website where all the clubs of the college come together such that the students of college (and upcoming students) can easily get all the information regarding the clubs and their event. Upcoming students can easily compare not only the academic but also the cultural/social parts of various colleges so that they are able to make a good and informed choice of college selection.Event Organization between different colleges can be made easier by allowing them to Collaborate with the help of the platform
+
   
 ## CORRECT Demo Video Link:
   <a href="https://drive.google.com/file/d/1YM0xndAuhAo0oxc_We_bShZ3BFuNjYeJ/view">https://drive.google.com/file/d/1YM0xndAuhAo0oxc_We_bShZ3BFuNjYeJ/view</a>
@@ -22,7 +23,7 @@
 
 Team Name: Callback_Chasers
 
-* [Neetu Agrawal](https://github.com/neeagwl)
+* [Neetu Agarwal](https://github.com/neeagwl)
 * [Shaifali Singh](https://github.com/shaifali-singh)
 * [Ambica Bhatia](https://github.com/Ambica06)
 * [Prerna Agrawal](https://github.com/Prerna27agrawal)
