@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {Alert} from 'react-bootstrap';
 import axios from 'axios';
+import {LinkContainer} from 'react-router-bootstrap';
+import {Navbar, Nav, NavDropdown} from 'react-bootstrap';
+import { Feed } from 'semantic-ui-react';
 
 import './ClubProfile.css'
 // reactstrap components
@@ -36,6 +39,8 @@ function ClubProfile() {
          const [open2, setOpen2] = useState(false);
          const [show, setShow] = useState(false);
 
+         const [allClub,setAllClub] = useState([]);
+         const [recommendedClub,setRecommendedClub] = useState([]);
          const userLogin = useSelector(state=>state.userLogin);
          const {loading, error,userInfo} = userLogin;
         
@@ -49,6 +54,7 @@ function ClubProfile() {
               .then(club =>{
                 console.log(club);
                 setClubProfile(club.club);
+                setAllClub(club.clubs);
               })
               .catch(err=> {
                 console.log(err)
@@ -112,30 +118,56 @@ function ClubProfile() {
               'Access-Control-Allow-Origin' :'*'
             },
           }
-          const {data} = await axios.post('http://4f0d1c6372b2.ngrok.io/predict',
+          const {data} = await axios.post('http://24c1c50d45bb.ngrok.io/predict',
                                             article, config)
-          console.log(data);                                 
+        
 
-          // fetch(`/api/UserSubscribe/${clubId}/${userInfo.user._id}`)
-          // .then(res=>res.json())
-          // .then(UserSubscribe => {
-          //   console.log(UserSubscribe)
-          //   setUserSubscribe(true);
-          //   setShow(true);
-          // })
-          // fetch(`/api/UserSubscribe/${clubId}/${userInfo.user._id}`)
-          // .then(res=>res.json())
-          // .then(UserSubscribe => {
-          //   console.log(UserSubscribe)
-          //   setUserSubscribe(true);
-          // })
-          // .catch(err=> {
-          //   console.log(err)
-          // })
-          // .catch(err =>{
-          // console.log(err)
-          // })
+            console.log(data); 
+          //  var word = data.split("\"");
+          //     var res=[];
+          //       var rebels1 = allClub.filter(function (c){
+          //             return  c._id == word[1];
+          //       })
+          //       var rebels2 = allClub.filter(function (c){
+          //         return  c._id == word[3];
+          //          })
+          //   var rebels3 = allClub.filter(function (c){
+          //     return  c._id == word[5];
+          //       })
+          //       res = [... rebels1,...rebels2,...rebels3]
+          //     setRecommendedClub(res);                           
+        
+          fetch(`/api/UserSubscribe/${clubId}/${userInfo.user._id}`)
+          .then(res=>res.json())
+          .then(UserSubscribe => {
+            var word = data.split("\"");
+            var res=[];
+              var rebels1 = allClub.filter(function (c){
+                    return  c._id == word[1];
+              })
+              var rebels2 = allClub.filter(function (c){
+                return  c._id == word[3];
+                 })
+          var rebels3 = allClub.filter(function (c){
+            return  c._id == word[5];
+              })
+              res = [... rebels1,...rebels2,...rebels3]
+            setRecommendedClub(res);  
+            console.log(UserSubscribe)
+            setUserSubscribe(true);
+            setShow(true);
+          })
+          .catch(err=> {
+            console.log(err)
+          })
+          .catch(err =>{
+          console.log(err)
+          })
   } 
+   
+  console.log(recommendedClub);
+  
+
   
    const unsubscribeHandler = (e)=>{
     e.preventDefault();
@@ -158,12 +190,35 @@ function ClubProfile() {
     <>
  
 
-  { show && <Alert className="alert" variant="danger" onClose={() => setShow(false)} dismissible>
-        <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+  { show && <Alert className="light" variant="danger" onClose={() => setShow(false)} dismissible>
+        <Alert.Heading>Hey there! Here are some more recommended clubs for you!</Alert.Heading>
         <p>
-          Change this and that and try again. Duis mollis, est non commodo
-          luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.
-          Cras mattis consectetur purus sit amet fermentum.
+        {recommendedClub.map( (club) => {
+                console.log(club);
+                return (
+                    <div key={club._id} class="notif">
+                             <LinkContainer to={'/clubInfo/'+club._id}>
+                            <Nav.Link >
+                  <Feed>
+                <Feed.Event>
+                {/* <Feed.Label className="feed-img" image={notif.img} /> */}
+                <Feed.Content> 
+                  {/* <Feed.Date className="feed-date" content={<Moment fromNow>{notif.createdAt}</Moment>} /> */}
+                  <Feed.Summary>
+                   {club.name}
+                   {/* For more details Check here <a href={'/clubInfo/'+notif.Club_id}></a> */}
+                  </Feed.Summary>
+                </Feed.Content>
+              </Feed.Event>
+              </Feed>
+              </Nav.Link>
+                        </LinkContainer>
+                        <hr className="my-3" />
+              </div>
+           
+                )
+            })
+          }
         </p>
       </Alert>
   }

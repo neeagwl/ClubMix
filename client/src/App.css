@@ -47,6 +47,9 @@ transform: scale(1.05,1.05);
 max-height:400px;
 overflow: auto;
 }
+.list:hover{
+  font-weight: 900;
+}
 /* 
 .feed-date{
   margin-top: 10px;

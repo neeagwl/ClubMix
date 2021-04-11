@@ -4,7 +4,7 @@ import 'moment-timezone';
 import './Post.css';
 
 const Post = ({post}) => {
-  console.log(post);
+  // console.log(post);
 
 const [postdata,setPostData] = useState();
 useEffect(()=>{

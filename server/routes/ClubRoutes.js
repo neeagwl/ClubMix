@@ -111,13 +111,15 @@ router.get('/api/allClubPostandEvent/:id',(req,res)=>{
 router.get('/api/clubInfo/:id',(req,res)=>{
     console.log("hii");
     console.log(req.params.id);
+    Club.find().then(clubs=>{
     Club.findOne({_id:req.params.id})//.populate('clubAdmin.id',"_id name email registration_no")
     .then(club =>{
         // console.log(club);
-        res.json({club:club});
+        res.json({club:club,clubs:clubs});
     }).catch(err=>{
         console.log(err);
-    });
+    })
+});
 });
 
 
