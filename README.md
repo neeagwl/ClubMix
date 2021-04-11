@@ -1,28 +1,22 @@
-<!-- <h1 align="center">Hack36 Template Readme</h1>
-<p align="center">
-</p>
-
-<a href="https://hack36.com"> <img src="http://bit.ly/BuiltAtHack36" height=20px> </a> -->
-
-
 ## Introduction:
-  Intro of the project
+  A website where all the clubs of the college come together such that the students of college (and upcoming students) can easily get all the information regarding the clubs and their events. 
   
 ## Demo Video Link:
   <a href="https://youtu.be/dQw4w9WgXcQ">https://youtu.be/dQw4w9WgXcQ</a>
   
 ## Presentation Link:
-  <a href="https://docs.google.com/presentation/d/1NEbqpM6J6UkmHN_J6NsgOhKvDU6fkfnli4OIg1lh-pk/edit?usp=sharing"> ppt link here </a>
+  <a href="https://drive.google.com/file/d/1lhxIngmXFBDFqbU3iuPj_tw17BS_E4Mk/view?usp=sharing"> PPT Link Here </a>
   
   
 ## Table of Contents:
 
 ## Technology Stack:
   1) Node.JS
-  2) Google Collab
-  3) Javafx
-  4) Machine Learning
-  
+  2) Google Colab
+  3) Machine Learning
+  4) ReactJs
+  5) MongoDB
+  6) FastApi Server
 
 ## Contributors:
 
